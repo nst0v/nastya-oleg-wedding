@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#F7F0E6">
+    <meta name="description" content="Свадебное приглашение Насти и Олега">
+    <title>Настя & Олег | Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#invitation">К приглашению</a>
+
+    <header class="hero" id="top" data-wedding-date="2026-08-22T16:00:00+03:00">
+      <div class="hero__image image-reveal reveal">
+        <div
+          class="photo-placeholder photo-placeholder--hero"
+          role="img"
+          aria-label="Место для вертикального фото пары"
+        >
+          <span>Фото пары</span>
+          <strong>вертикальный портрет, прогулка или нежный кадр вдвоем</strong>
+        </div>
+      </div>
+
+      <div class="hero__content">
+        <p class="overline reveal">Wedding invitation</p>
+        <h1 class="names reveal" data-delay="1">
+          <span>Настя</span>
+          <span class="names__amp">&</span>
+          <span>Олег</span>
+        </h1>
+        <div class="hero__meta reveal" data-delay="2">
+          <span>22 августа 2026</span>
+          <span>Оранжевая ферма</span>
+        </div>
+        <a class="button reveal" data-delay="3" href="#rsvp">Подтвердить присутствие</a>
+      </div>
+
+      <div class="countdown" aria-label="Обратный отсчет до свадьбы">
+        <span>
+          <strong data-countdown="days">00</strong>
+          дней
+        </span>
+        <span>
+          <strong data-countdown="hours">00</strong>
+          часов
+        </span>
+        <span>
+          <strong data-countdown="minutes">00</strong>
+          минут
+        </span>
+        <span>
+          <strong data-countdown="seconds">00</strong>
+          секунд
+        </span>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Навигация по приглашению">
+      <a href="#details">Дата</a>
+      <a href="#timeline">План</a>
+      <a href="#dress-code">Дресс-код</a>
+      <a href="#rsvp">Анкета</a>
+    </nav>
+
+    <main>
+      <section class="section invitation" id="invitation">
+        <div class="container invitation__grid">
+          <div class="section-label reveal">
+            <span>01</span>
+            <p class="overline">Дорогие гости</p>
+          </div>
+          <div class="invitation__text reveal" data-delay="1">
+            <h2>Мы женимся</h2>
+            <p>
+              В этот день нам хочется быть рядом с теми, кто видел нашу историю,
+              поддерживал нас и умеет радоваться по-настоящему.
+            </p>
+            <p>
+              Приглашаем вас провести с нами теплый вечер: немного волнения,
+              много света, красивые слова и праздник, который мы будем помнить.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section details" id="details">
+        <div class="container">
+          <div class="section-label reveal">
+            <span>02</span>
+            <p class="overline">Дата и место</p>
+          </div>
+
+          <div class="date-layout">
+            <div class="date-card reveal">
+              <span class="date-card__monogram">N / O</span>
+              <span class="date-card__weekday">Суббота</span>
+              <strong>22</strong>
+              <span class="date-card__month">августа</span>
+              <span class="date-card__year">2026</span>
+              <span class="date-card__time">Начало в 16:00</span>
+            </div>
+
+            <div class="place reveal" data-delay="1">
+              <h2>Оранжевая ферма</h2>
+              <p class="place__lead">Загородная площадка для церемонии и ужина</p>
+              <p>Владимирская область, точная локация отмечена на карте</p>
+              <div class="place__time">
+                <span>Начало</span>
+                <strong>16:00</strong>
+              </div>
+
+              <div class="map-card" aria-label="Карта с точкой Оранжевая ферма">
+                <iframe
+                  title="Оранжевая ферма на карте"
+                  src="https://yandex.ru/map-widget/v1/?ll=40.734919%2C55.989555&z=16.8&pt=40.734919%2C55.989555%2Cpm2rdm"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <a
+                class="map-link"
+                href="https://yandex.ru/maps/org/oranzhevaya_ferma/99030501914/?ll=40.734919%2C55.989555&z=16.8"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Открыть маршрут
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section timeline-section" id="timeline">
+        <div class="container">
+          <div class="section-label reveal">
+            <span>03</span>
+            <p class="overline">Программа дня</p>
+          </div>
+
+          <div class="timeline-intro reveal" data-delay="1">
+            <h2>Без спешки, но с красивыми паузами</h2>
+          </div>
+
+          <ol class="timeline">
+            <li class="timeline__item reveal">
+              <time>16:00</time>
+              <div>
+                <h3>Welcome</h3>
+                <p>Встречаемся на площадке, знакомимся и берем бокал игристого.</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
+              <time>16:30</time>
+              <div>
+                <h3>Церемония</h3>
+                <p>Короткая и очень важная часть дня.</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
+              <time>17:30</time>
+              <div>
+                <h3>Ужин</h3>
+                <p>Тосты, теплый свет, сезонное меню и разговоры.</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
+              <time>20:00</time>
+              <div>
+                <h3>Танцы</h3>
+                <p>Первый танец, десерт и музыка до финала вечера.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section dress-code" id="dress-code">
+        <div class="dress-code__photo image-reveal reveal">
+          <div
+            class="photo-placeholder photo-placeholder--details"
+            role="img"
+            aria-label="Место для фото свадебных деталей и палитры"
+          >
+            <span>Фото деталей</span>
+            <strong>букет, кольца, ткань, сервировка или палитра свадьбы</strong>
+          </div>
+        </div>
+
+        <div class="container dress-code__content">
+          <div class="section-label reveal">
+            <span>04</span>
+            <p class="overline">Дресс-код</p>
+          </div>
+          <h2 class="reveal" data-delay="1">Мягкая природная палитра</h2>
+          <p class="reveal" data-delay="2">
+            Мы будем рады образам в теплой природной палитре: мягкие оранжевые,
+            солнечные, бежевые, голубые и оливковые оттенки.
+          </p>
+
+          <div class="palette reveal" data-delay="3" aria-label="Палитра дресс-кода">
+            <figure class="palette-item">
+              <img class="palette-blob" src="img/blobs/optimized/sun-kiss.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
+              <figcaption>Солнечный беж</figcaption>
+            </figure>
+            <figure class="palette-item">
+              <img class="palette-blob" src="img/blobs/optimized/dusty-orange.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
+              <figcaption>Пыльный оранжевый</figcaption>
+            </figure>
+            <figure class="palette-item">
+              <img class="palette-blob" src="img/blobs/optimized/tangerine.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
+              <figcaption>Мандарин</figcaption>
+            </figure>
+            <figure class="palette-item">
+              <img class="palette-blob" src="img/blobs/optimized/sun-shine.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
+              <figcaption>Солнечный</figcaption>
+            </figure>
+            <figure class="palette-item">
+              <img class="palette-blob" src="img/blobs/optimized/butter-yellow.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
+              <figcaption>Сливочный желтый</figcaption>
+            </figure>
+            <figure class="palette-item">
+              <img class="palette-blob" src="img/blobs/optimized/cashmere-blue.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
+              <figcaption>Кашемировый голубой</figcaption>
+            </figure>
+            <figure class="palette-item">
+              <img class="palette-blob" src="img/blobs/optimized/chamois.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
+              <figcaption>Шамуа</figcaption>
+            </figure>
+            <figure class="palette-item">
+              <img class="palette-blob" src="img/blobs/optimized/green-olive.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
+              <figcaption>Зеленая олива</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wishes" id="wishes">
+        <div class="container">
+          <div class="section-label reveal">
+            <span>05</span>
+            <p class="overline">Пожелания</p>
+          </div>
+
+          <div class="wishes__heading reveal" data-delay="1">
+            <h2>Несколько нежных просьб</h2>
+          </div>
+
+          <div class="wish-lines">
+            <article class="wish-line reveal">
+              <span class="wish-line__mark" aria-hidden="true">01</span>
+              <p>Самый ценный подарок для нас - ваше присутствие рядом в этот день.</p>
+            </article>
+            <article class="wish-line reveal">
+              <span class="wish-line__mark" aria-hidden="true">02</span>
+              <p>Если захочется прийти с комплиментом, вместо цветов можно выбрать бутылку вина для нашей коллекции.</p>
+            </article>
+            <article class="wish-line reveal">
+              <span class="wish-line__mark" aria-hidden="true">03</span>
+              <p>А если захотите порадовать нас подарком, удобнее всего будет конверт.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section rsvp" id="rsvp">
+        <div class="container">
+          <div class="section-label reveal">
+            <span>06</span>
+            <p class="overline">Анкета</p>
+          </div>
+
+          <div class="rsvp__grid">
+            <div class="rsvp__intro reveal">
+              <h2>Ответьте, пожалуйста, до 10 августа</h2>
+              <p>
+                Так мы сможем красиво рассадить гостей и передать площадке точное
+                количество человек.
+              </p>
+            </div>
+
+            <form class="rsvp-form reveal" data-delay="1">
+              <label>
+                <span>Ваше имя и фамилия</span>
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+
+              <fieldset>
+                <legend>Вы будете с нами?</legend>
+                <div class="choice-group">
+                  <label>
+                    <input type="radio" name="attendance" value="yes" required>
+                    <span>Да, буду</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="attendance" value="no">
+                    <span>Не смогу</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <label>
+                <span>Кто будет с вами</span>
+                <textarea
+                  name="guests"
+                  rows="3"
+                  placeholder="Имена гостей, если вы будете не одни"
+                ></textarea>
+              </label>
+
+              <label>
+                <span>Любимый трек</span>
+                <input type="text" name="song" autocomplete="off">
+              </label>
+
+              <button class="button button--wide" type="submit">Отправить ответ</button>
+              <p class="form-note" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="guest-chat reveal" data-delay="2">
+            <div class="guest-chat__text">
+              <p class="overline">Чат для гостей</p>
+              <p>
+                Мы создадим чат ВКонтакте, чтобы делиться новостями, фото и
+                теплыми моментами свадебного дня.
+              </p>
+            </div>
+            <a
+              class="button guest-chat__button"
+              href="https://vk.com/im"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Вступить в чат ВКонтакте
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-screen" id="final">
+        <div
+          class="photo-placeholder photo-placeholder--final"
+          role="img"
+          aria-label="Место для финального атмосферного фото"
+        >
+          <span>Финальное фото</span>
+          <strong>вечерний кадр, гирлянды, танцы или общий снимок гостей</strong>
+        </div>
+        <div class="final-screen__content reveal">
+          <p class="overline">До встречи</p>
+          <h2>22.08.2026</h2>
+          <p>С любовью, Настя и Олег</p>
+        </div>
+      </section>
+    </main>
+
+    <a class="floating-rsvp" href="#rsvp">Анкета</a>
+
+    <script src="script.js"></script>
+  </body>
+</html>
