@@ -90,22 +90,173 @@ if ("IntersectionObserver" in window && navSections.length > 0) {
 
 const rsvpForm = document.querySelector(".rsvp-form");
 const formNote = document.querySelector(".form-note");
+const multiSelects = document.querySelectorAll("[data-multi-select]");
+const TELEGRAM_BOT_TOKEN = "7244155453:AAEdnet6p9Vc43TZoUEVtLVcMuANQHSmpvw";
+const TELEGRAM_CHAT_ID = "-1003934063475";
+
+const closeMultiSelect = (multiSelect) => {
+  const button = multiSelect.querySelector(".multi-select__button");
+
+  multiSelect.classList.remove("is-open");
+  button?.setAttribute("aria-expanded", "false");
+};
+
+const updateMultiSelectValue = (multiSelect) => {
+  const value = multiSelect.querySelector("[data-multi-select-value]");
+  const selectedOptions = Array.from(multiSelect.querySelectorAll('input[type="checkbox"]:checked'));
+
+  if (!value) {
+    return;
+  }
+
+  if (selectedOptions.length === 0) {
+    value.textContent = "Можно выбрать несколько вариантов";
+    return;
+  }
+
+  value.textContent =
+    selectedOptions.length <= 2
+      ? selectedOptions.map((option) => option.value).join(", ")
+      : `Выбрано вариантов: ${selectedOptions.length}`;
+};
+
+multiSelects.forEach((multiSelect) => {
+  const button = multiSelect.querySelector(".multi-select__button");
+  const checkboxes = multiSelect.querySelectorAll('input[type="checkbox"]');
+
+  button?.addEventListener("click", () => {
+    const isOpen = multiSelect.classList.contains("is-open");
+
+    multiSelects.forEach(closeMultiSelect);
+    multiSelect.classList.toggle("is-open", !isOpen);
+    button.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => updateMultiSelectValue(multiSelect));
+  });
+
+  updateMultiSelectValue(multiSelect);
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest("[data-multi-select]")) {
+    multiSelects.forEach(closeMultiSelect);
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    multiSelects.forEach(closeMultiSelect);
+  }
+});
+
+const formatAttendance = (attendance) => {
+  if (attendance === "yes") {
+    return "✅ Присутствие: Да, буду присутствовать";
+  }
+
+  if (attendance === "no") {
+    return "❌ Присутствие: Нет, не смогу присутствовать";
+  }
+
+  return "Присутствие: Не указано";
+};
+
+const formatTelegramMessage = (answer) => {
+  const title = answer.attendance === "no" ? "🔕 Новый отказ" : "🔔 Новое подтверждение!";
+  const alcohol = answer.alcohol.length > 0
+    ? answer.alcohol.map((item) => `• ${item}`).join("\n")
+    : "Не указано";
+  const additionalInfo = answer.additionalInfo?.trim() || "Не указано";
+
+  return [
+    title,
+    "",
+    `👤 Имя: ${answer.name || "Не указано"}`,
+    formatAttendance(answer.attendance),
+    `🥂 Алкоголь:\n${alcohol}`,
+    `📝 Дополнительная информация: ${additionalInfo}`,
+  ].join("\n");
+};
+
+const isTelegramConfigured = () =>
+  TELEGRAM_BOT_TOKEN &&
+  TELEGRAM_BOT_TOKEN !== "ВСТАВЬ_НОВЫЙ_ТОКЕН_БОТА" &&
+  TELEGRAM_CHAT_ID;
+
+const showRsvpSuccess = () => {
+  rsvpForm.classList.add("is-submitted");
+  rsvpForm.querySelector(".rsvp-form__fields")?.setAttribute("aria-hidden", "true");
+  rsvpForm.querySelector(".rsvp-success")?.setAttribute("aria-hidden", "false");
+  rsvpForm.querySelectorAll("input, textarea, button").forEach((control) => {
+    control.setAttribute("disabled", "disabled");
+  });
+};
 
 if (rsvpForm && formNote) {
-  rsvpForm.addEventListener("submit", (event) => {
+  rsvpForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    if (rsvpForm.classList.contains("is-submitted")) {
+      return;
+    }
+
     const formData = new FormData(rsvpForm);
+    const submitButton = rsvpForm.querySelector('button[type="submit"]');
+    const submitButtonText = submitButton?.textContent;
     const answer = {
       name: formData.get("name"),
       attendance: formData.get("attendance"),
-      guests: formData.get("guests"),
-      song: formData.get("song"),
+      additionalInfo: formData.get("additional_info"),
+      alcohol: formData.getAll("alcohol"),
       submittedAt: new Date().toISOString(),
     };
 
-    localStorage.setItem("wedding-rsvp-answer", JSON.stringify(answer));
-    formNote.textContent = "Спасибо, ответ сохранен.";
-    rsvpForm.reset();
+    formNote.textContent = "Отправляем ответ...";
+    if (submitButton) {
+      submitButton.textContent = "Отправляем...";
+    }
+    submitButton?.setAttribute("disabled", "disabled");
+
+    try {
+      if (!isTelegramConfigured()) {
+        throw new Error("Telegram bot token is not configured");
+      }
+
+      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: formatTelegramMessage(answer),
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error("Request failed");
+      }
+
+      localStorage.setItem("wedding-rsvp-answer", JSON.stringify(answer));
+      formNote.textContent = "Ваш ответ уже пришел нам, спасибо!";
+      multiSelects.forEach((multiSelect) => {
+        closeMultiSelect(multiSelect);
+        updateMultiSelectValue(multiSelect);
+      });
+      showRsvpSuccess();
+    } catch (error) {
+      formNote.textContent = "Не получилось отправить ответ. Попробуйте еще раз чуть позже.";
+      alert("Не получилось отправить ответ. Попробуйте еще раз чуть позже.");
+    } finally {
+      if (!rsvpForm.classList.contains("is-submitted")) {
+        if (submitButton && submitButtonText) {
+          submitButton.textContent = submitButtonText;
+        }
+        submitButton?.removeAttribute("disabled");
+      }
+    }
   });
 }

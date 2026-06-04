@@ -69,7 +69,8 @@
     <nav class="quick-nav" aria-label="Навигация по приглашению">
       <a href="#details">Дата</a>
       <a href="#timeline">План</a>
-      <a href="#dress-code">Дресс-код</a>
+      <a href="#dress-code-palette">Дресс-код</a>
+      <a href="#wishes">Пожелания</a>
       <a href="#rsvp">Анкета</a>
     </nav>
 
@@ -200,7 +201,7 @@
           </div>
         </div>
 
-        <div class="container dress-code__content">
+        <div class="container dress-code__content" id="dress-code-palette">
           <div class="section-label reveal">
             <span>04</span>
             <p class="overline">Дресс-код</p>
@@ -293,41 +294,90 @@
             </div>
 
             <form class="rsvp-form reveal" data-delay="1">
-              <label>
-                <span>Ваше имя и фамилия</span>
-                <input type="text" name="name" autocomplete="name" required>
-              </label>
+              <div class="rsvp-form__fields">
+                <label>
+                  <span>Ваше имя и фамилия</span>
+                  <input type="text" name="name" autocomplete="name" required>
+                </label>
 
-              <fieldset>
-                <legend>Вы будете с нами?</legend>
-                <div class="choice-group">
-                  <label>
-                    <input type="radio" name="attendance" value="yes" required>
-                    <span>Да, буду</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="attendance" value="no">
-                    <span>Не смогу</span>
-                  </label>
+                <fieldset>
+                  <legend>Вы будете с нами?</legend>
+                  <div class="choice-group">
+                    <label>
+                      <input type="radio" name="attendance" value="yes" required>
+                      <span>Да, буду</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="attendance" value="no">
+                      <span>Не смогу</span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <label>
+                  <span>Дополнительная информация</span>
+                  <textarea
+                    name="additional_info"
+                    rows="3"
+                    placeholder="Если с вами будет кто-то еще или иная нужная информация"
+                  ></textarea>
+                </label>
+
+                <div class="form-field">
+                  <span>Какой алкоголь предпочтителен для вас?</span>
+                  <div class="multi-select" data-multi-select>
+                    <button
+                      class="multi-select__button"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="alcohol-options"
+                    >
+                      <span data-multi-select-value>Можно выбрать несколько вариантов</span>
+                    </button>
+                    <div class="multi-select__panel" id="alcohol-options">
+                      <label class="multi-select__option">
+                        <input type="checkbox" name="alcohol" value="Белое вино сухое">
+                        <span>Белое вино сухое</span>
+                      </label>
+                      <label class="multi-select__option">
+                        <input type="checkbox" name="alcohol" value="Белое вино полусладкое">
+                        <span>Белое вино полусладкое</span>
+                      </label>
+                      <label class="multi-select__option">
+                        <input type="checkbox" name="alcohol" value="Красное вино сладкое">
+                        <span>Красное вино сладкое</span>
+                      </label>
+                      <label class="multi-select__option">
+                        <input type="checkbox" name="alcohol" value="Розовое вино">
+                        <span>Розовое вино</span>
+                      </label>
+                      <label class="multi-select__option">
+                        <input type="checkbox" name="alcohol" value="Водка">
+                        <span>Водка</span>
+                      </label>
+                      <label class="multi-select__option">
+                        <input type="checkbox" name="alcohol" value="Коньяк">
+                        <span>Коньяк</span>
+                      </label>
+                      <label class="multi-select__option">
+                        <input type="checkbox" name="alcohol" value="Виски">
+                        <span>Виски</span>
+                      </label>
+                      <label class="multi-select__option">
+                        <input type="checkbox" name="alcohol" value="Jagermeiser">
+                        <span>Jagermeiser</span>
+                      </label>
+                    </div>
+                  </div>
+                  <small class="field-note">Если вы не пьете алкоголь, просто оставьте поле пустым.</small>
                 </div>
-              </fieldset>
 
-              <label>
-                <span>Кто будет с вами</span>
-                <textarea
-                  name="guests"
-                  rows="3"
-                  placeholder="Имена гостей, если вы будете не одни"
-                ></textarea>
-              </label>
-
-              <label>
-                <span>Любимый трек</span>
-                <input type="text" name="song" autocomplete="off">
-              </label>
-
-              <button class="button button--wide" type="submit">Отправить ответ</button>
-              <p class="form-note" role="status" aria-live="polite"></p>
+                <button class="button button--wide" type="submit">Отправить ответ</button>
+              </div>
+              <div class="rsvp-success" aria-hidden="true">
+                <p>Ваш ответ уже пришел нам, спасибо!</p>
+              </div>
+              <p class="form-note visually-hidden" role="status" aria-live="polite"></p>
             </form>
           </div>
 
