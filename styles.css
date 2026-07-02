@@ -1712,17 +1712,21 @@ body.has-envelope {
     font-weight: 400;
   }
 
-  .qr {
+  .qr-link {
+    display: block;
     width: 230px;
-    height: 230px;
     margin: 0 auto 28px;
-    background:
-      linear-gradient(90deg, var(--dusty-orange) 10px, transparent 10px 20px, var(--dusty-orange) 20px 30px, transparent 30px 40px, var(--dusty-orange) 40px 50px, transparent 50px),
-      linear-gradient(var(--dusty-orange) 10px, transparent 10px 20px, var(--dusty-orange) 20px 30px, transparent 30px 40px, var(--dusty-orange) 40px 50px, transparent 50px),
-      var(--paper);
-    background-size: 50px 50px;
     border: 18px solid var(--paper);
-    box-shadow: 0 0 0 1px var(--chamois);
+    border-radius: 6px;
+    background: #fffaf2;
+    box-shadow:
+      0 18px 42px rgba(126, 69, 45, .12),
+      0 0 0 1px var(--chamois);
+  }
+
+  .qr {
+    width: 100%;
+    height: auto;
   }
 
   .desktop-card p:last-child {
