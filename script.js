@@ -1,92 +1,96 @@
-const revealElements = document.querySelectorAll(".reveal");
+const musicButton = document.querySelector(".music-btn");
+const audio = document.querySelector("#bg-music");
+const envelopeIntro = document.querySelector(".envelope-intro");
+const envelopeButton = document.querySelector(".envelope-button");
+
+document.documentElement.classList.add("motion-ready");
+document.body.classList.toggle("has-envelope", Boolean(envelopeIntro));
+
+const splitTextToLetters = (element, delayStart = 0, delayStep = 34) => {
+  let index = 0;
+
+  const walk = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const fragment = document.createDocumentFragment();
+
+      node.textContent.split("").forEach((char) => {
+        const span = document.createElement("span");
+        span.className = char.trim() ? "char" : "char char--space";
+        span.style.setProperty("--char-delay", `${delayStart + index * delayStep}ms`);
+        span.innerHTML = char === " " ? "&nbsp;" : char;
+        fragment.appendChild(span);
+        index += 1;
+      });
+
+      node.replaceWith(fragment);
+      return;
+    }
+
+    Array.from(node.childNodes).forEach(walk);
+  };
+
+  walk(element);
+  return delayStart + index * delayStep;
+};
+
+let heroDelay = 120;
+document.querySelectorAll(".couple, .hero h1 .hero-line, .hero h1 > span:not(.hero-line)").forEach((element) => {
+  heroDelay = splitTextToLetters(element, heroDelay, 32) + 70;
+});
+
+document.querySelectorAll("main > section:not(.hero):not(.envelope-intro) > *, main > .marquee:not(.marquee--top)").forEach((element) => {
+  element.classList.add("reveal-soft");
+});
+
+envelopeButton?.addEventListener("click", () => {
+  if (!envelopeIntro || envelopeIntro.classList.contains("is-opening")) {
+    return;
+  }
+
+  envelopeIntro.classList.add("is-opening");
+
+  window.setTimeout(() => {
+    envelopeIntro.classList.add("is-open");
+    document.body.classList.remove("has-envelope");
+  }, 1500);
+});
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
+        if (!entry.isIntersecting) return;
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       });
     },
-    {
-      threshold: 0.16,
-      rootMargin: "0px 0px -8% 0px",
-    }
+    { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
   );
 
-  revealElements.forEach((element) => revealObserver.observe(element));
+  document.querySelectorAll(".reveal-soft").forEach((element) => revealObserver.observe(element));
 } else {
-  revealElements.forEach((element) => element.classList.add("is-visible"));
+  document.querySelectorAll(".reveal-soft").forEach((element) => element.classList.add("is-visible"));
 }
 
-const hero = document.querySelector(".hero");
-const countdownParts = {
-  days: document.querySelector('[data-countdown="days"]'),
-  hours: document.querySelector('[data-countdown="hours"]'),
-  minutes: document.querySelector('[data-countdown="minutes"]'),
-  seconds: document.querySelector('[data-countdown="seconds"]'),
-};
+musicButton?.addEventListener("click", async () => {
+  if (!audio) return;
 
-const formatTimePart = (value) => String(Math.max(0, value)).padStart(2, "0");
-
-const updateCountdown = () => {
-  if (
-    !hero ||
-    !countdownParts.days ||
-    !countdownParts.hours ||
-    !countdownParts.minutes ||
-    !countdownParts.seconds
-  ) {
-    return;
-  }
-
-  const targetDate = new Date(hero.dataset.weddingDate);
-  const difference = targetDate.getTime() - Date.now();
-  const totalSeconds = Math.max(0, Math.floor(difference / 1000));
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  countdownParts.days.textContent = formatTimePart(days);
-  countdownParts.hours.textContent = formatTimePart(hours);
-  countdownParts.minutes.textContent = formatTimePart(minutes);
-  countdownParts.seconds.textContent = formatTimePart(seconds);
-};
-
-updateCountdown();
-window.setInterval(updateCountdown, 1000);
-
-const navLinks = document.querySelectorAll(".quick-nav a");
-const navSections = Array.from(navLinks)
-  .map((link) => document.querySelector(link.getAttribute("href")))
-  .filter(Boolean);
-
-if ("IntersectionObserver" in window && navSections.length > 0) {
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        navLinks.forEach((link) => {
-          link.classList.toggle("is-active", link.getAttribute("href") === `#${entry.target.id}`);
-        });
-      });
-    },
-    {
-      threshold: 0.34,
-      rootMargin: "-18% 0px -54% 0px",
+  try {
+    if (audio.paused) {
+      await audio.play();
+      musicButton.classList.add("is-playing");
+      musicButton.setAttribute("aria-pressed", "true");
+      musicButton.innerHTML = "ВЫКЛ.<br>МУЗЫКУ";
+    } else {
+      audio.pause();
+      musicButton.classList.remove("is-playing");
+      musicButton.setAttribute("aria-pressed", "false");
+      musicButton.innerHTML = "ВКЛЮЧИТЬ<br>МУЗЫКУ";
     }
-  );
-
-  navSections.forEach((section) => navObserver.observe(section));
-}
+  } catch (error) {
+    musicButton.classList.toggle("is-playing");
+  }
+});
 
 const rsvpForm = document.querySelector(".rsvp-form");
 const formNote = document.querySelector(".form-note");
@@ -114,10 +118,12 @@ const updateMultiSelectValue = (multiSelect) => {
     return;
   }
 
-  value.textContent =
-    selectedOptions.length <= 2
-      ? selectedOptions.map((option) => option.value).join(", ")
-      : `Выбрано вариантов: ${selectedOptions.length}`;
+  if (selectedOptions.length === 1) {
+    value.textContent = selectedOptions[0].value;
+    return;
+  }
+
+  value.textContent = `Выбрано: ${selectedOptions.length}`;
 };
 
 multiSelects.forEach((multiSelect) => {
@@ -241,7 +247,7 @@ if (rsvpForm && formNote) {
       }
 
       localStorage.setItem("wedding-rsvp-answer", JSON.stringify(answer));
-      formNote.textContent = "Ваш ответ уже пришел нам, спасибо!";
+      formNote.textContent = "";
       multiSelects.forEach((multiSelect) => {
         closeMultiSelect(multiSelect);
         updateMultiSelectValue(multiSelect);
@@ -260,3 +266,20 @@ if (rsvpForm && formNote) {
     }
   });
 }
+
+const paletteCards = document.querySelectorAll(".palette-collection img");
+
+const togglePaletteCard = (card) => {
+  const isOpen = card.classList.contains("is-open");
+  paletteCards.forEach((item) => item.classList.remove("is-open"));
+  if (!isOpen) card.classList.add("is-open");
+};
+
+paletteCards.forEach((card) => {
+  card.addEventListener("click", () => togglePaletteCard(card));
+  card.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    togglePaletteCard(card);
+  });
+});

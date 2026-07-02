@@ -1,425 +1,267 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#F7F0E6">
-    <meta name="description" content="Свадебное приглашение Насти и Олега">
-    <title>Настя & Олег | Wedding Invitation</title>
+    <meta name="theme-color" content="#fff6e9">
+    <meta name="description" content="Электронное свадебное приглашение Олег и Анастасия">
+    <title>Олег и Анастасия | Blossom</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    >
-    <script>
-      document.documentElement.classList.add("js");
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <a class="skip-link" href="#invitation">К приглашению</a>
+    <div class="desktop-only" aria-hidden="true">
+      <div class="desktop-card">
+        <p class="desktop-title"><span>ДОРОГИЕ</span> <em>Гости!</em></p>
+        <div class="qr" aria-hidden="true"></div>
+        <p>Наше приглашение доступно только для просмотра<br>с телефона — и это не случайно! Ведь в 99% случаев гости открывают электронные приглашения именно на смартфоне. Просто наведите камеру на этот QR-код и наслаждайтесь просмотром!</p>
+      </div>
+    </div>
 
-    <header class="hero" id="top" data-wedding-date="2026-08-22T16:00:00+03:00">
-      <div class="hero__image image-reveal reveal">
-        <div
-          class="photo-placeholder photo-placeholder--hero"
-          role="img"
-          aria-label="Место для вертикального фото пары"
-        >
-          <span>Фото пары</span>
-          <strong>вертикальный портрет, прогулка или нежный кадр вдвоем</strong>
+    <main class="mobile-card">
+      <section class="envelope-intro" aria-label="Открыть приглашение">
+        <div class="envelope-scene">
+          <button class="envelope-button" type="button" aria-label="Открыть приглашение">
+            <span class="envelope">
+              <span class="envelope__back"></span>
+              <span class="envelope__letter">
+                <span>Вам письмо!</span>
+                <strong>LOVE<br>LETTER</strong>
+                <small>Олег и Анастасия</small>
+              </span>
+              <span class="envelope__flap envelope__flap--left"></span>
+              <span class="envelope__flap envelope__flap--right"></span>
+              <span class="envelope__flap envelope__flap--bottom"></span>
+              <span class="envelope__flap envelope__flap--top"></span>
+              <span class="envelope__front-copy" aria-hidden="true">
+                <span>Вам письмо!</span>
+                <strong>LOVE<br>LETTER</strong>
+                <small>Важное сообщение<br>для самых близких<br><em>от Олега и Анастасии 🧡</em></small>
+              </span>
+              <span class="envelope__seal">22.08</span>
+            </span>
+            <span class="envelope-hint">Открыть приглашение</span>
+          </button>
+          <div class="envelope-card-strip" aria-hidden="true">
+            <img src="img/blossom/card.JPG" alt="" width="683" height="2048">
+          </div>
         </div>
+      </section>
+
+      <div class="marquee marquee--top" aria-hidden="true">
+        <span>ПРИГЛАШЕНИЕ НА СВАДЬБУ&nbsp;&nbsp;&nbsp;ПРИГЛАШЕНИЕ НА СВАДЬБУ&nbsp;&nbsp;&nbsp;ПРИГЛАШЕНИЕ НА СВАДЬБУ&nbsp;&nbsp;&nbsp;</span>
       </div>
 
-      <div class="hero__content">
-        <p class="overline reveal">Wedding invitation</p>
-        <h1 class="names reveal" data-delay="1">
-          <span>Настя</span>
-          <span class="names__amp">&</span>
-          <span>Олег</span>
-        </h1>
-        <div class="hero__meta reveal" data-delay="2">
-          <span>22 августа 2026</span>
-          <span>Оранжевая ферма</span>
+      <section class="hero">
+        <p class="couple">OLEG + ANASTASIA</p>
+        <h1><span class="hero-line">ОДНАЖДЫ. <em>Навсегда.</em></span><span>С ЛЮБОВЬЮ</span></h1>
+        <img class="hero-photo" src="img/blossom/couple.jpg" alt="Олег и Анастасия" width="221" height="215">
+        <p class="hero-text">Наше главное «да!» случилось.<br>Мы женимся!</p>
+        <button class="music-btn" type="button" aria-pressed="false">ВКЛЮЧИТЬ<br>МУЗЫКУ</button>
+      </section>
+
+      <section class="invitation">
+        <img class="rose-arch" src="img/blossom/plain-arch-orange.png" alt="" width="1440" height="2400">
+        <div class="orange-silhouettes" aria-hidden="true">
+          <span class="orange-slice-mark orange-slice-mark--top"></span>
+          <span class="orange-slice-mark orange-slice-mark--bottom"></span>
         </div>
-        <a class="button reveal" data-delay="3" href="#rsvp">Подтвердить присутствие</a>
+        <div class="invite-copy">
+          <h2 class="invite-title">
+            <span class="invite-title__line"><em>Дорогие</em><span>ДРУЗЬЯ</span></span>
+            <span>И РОДНЫЕ</span>
+          </h2>
+          <p>Наша свадьба без вас не будет<br>такой счастливой, уютной и веселой<br>Приглашаем отметить этот день вместе<br>с нами!</p>
+        </div>
+        <div class="date-place">
+          <div class="date">
+            <strong>22</strong>
+            <span>августа</span>
+            <span>2026</span>
+          </div>
+          <div class="place">
+            <span>место</span>
+            <b>“Оранжевая ферма”</b>
+            <small>Владимир</small>
+          </div>
+          <a class="small-btn" href="https://yandex.ru/maps/-/CTeJ5XIP" target="_blank" rel="noreferrer">ПОСМОТРЕТЬ НА КАРТЕ</a>
+        </div>
+      </section>
+
+      <section class="timing">
+        <h2>ТАЙМИНГ</h2>
+        <p class="timing-lead">Чтобы вы чувствовали себя комфортно,<br>делимся планом вечера:</p>
+        <ol>
+          <li><time>15:00</time><b>СБОР ГОСТЕЙ</b><span>Общение с гостями<br>и праздничный фуршет</span></li>
+          <li><time>15:30</time><b>церемония</b><span>Пожалуйста, не стесняйтесь проявлять<br>ваши искренние эмоции</span></li>
+          <li><time>16:00</time><b>банкет</b><span>Время танцев, веселья, ваших<br>поздравлений и вкусной еды</span></li>
+        </ol>
+        <img class="guests-line" src="img/blossom/guests-line-orange.png" alt="" width="712" height="412">
+      </section>
+
+      <div class="marquee" aria-hidden="true">
+        <span>ПРИГЛАШЕНИЕ НА СВАДЬБУ&nbsp;&nbsp;&nbsp;ПРИГЛАШЕНИЕ НА СВАДЬБУ&nbsp;&nbsp;&nbsp;ПРИГЛАШЕНИЕ НА СВАДЬБУ&nbsp;&nbsp;&nbsp;</span>
       </div>
 
-      <div class="countdown" aria-label="Обратный отсчет до свадьбы">
-        <span>
-          <strong data-countdown="days">00</strong>
-          дней
-        </span>
-        <span>
-          <strong data-countdown="hours">00</strong>
-          часов
-        </span>
-        <span>
-          <strong data-countdown="minutes">00</strong>
-          минут
-        </span>
-        <span>
-          <strong data-countdown="seconds">00</strong>
-          секунд
-        </span>
-      </div>
-    </header>
-
-    <nav class="quick-nav" aria-label="Навигация по приглашению">
-      <a href="#details">Дата</a>
-      <a href="#timeline">План</a>
-      <a href="#dress-code-palette">Дресс-код</a>
-      <a href="#wishes">Пожелания</a>
-      <a href="#rsvp">Анкета</a>
-    </nav>
-
-    <main>
-      <section class="section invitation" id="invitation">
-        <div class="container invitation__grid">
-          <div class="section-label reveal">
-            <span>01</span>
-            <p class="overline">Дорогие гости</p>
-          </div>
-          <div class="invitation__text reveal" data-delay="1">
-            <h2>Мы женимся</h2>
-            <p>
-              В этот день нам хочется быть рядом с теми, кто видел нашу историю,
-              поддерживал нас и умеет радоваться по-настоящему.
-            </p>
-            <p>
-              Приглашаем вас провести с нами теплый вечер: немного волнения,
-              много света, красивые слова и праздник, который мы будем помнить.
-            </p>
+      <section class="dress">
+        <h2>ДРЕСС-КОД</h2>
+        <p class="latin">dress-code</p>
+        <p class="dress-intro">Мы очень трепетно готовим наше<br>торжество и будем благодарны, если вы<br>поддержите его цветовую гамму<br>и стилистику в своих образах</p>
+        <p class="palette-note">Выберите один или несколько оттенков<br>из нашей свадебной палитры</p>
+        <div class="palette-collection" aria-label="Цветовая палитра для гостей">
+          <img src="img/blossom/sunshine.jpg" alt="Sunshine" tabindex="0">
+          <img src="img/blossom/chamois.jpg" alt="Chamois" tabindex="0">
+          <img src="img/blossom/tangerine.jpg" alt="Tangerine" tabindex="0">
+          <img src="img/blossom/dusty-orange.jpg" alt="Dusty Orange" tabindex="0">
+          <img src="img/blossom/butter-yellow.jpg" alt="Butter Yellow" tabindex="0">
+          <img src="img/blossom/sun-kiss.jpg" alt="Sun Kiss" tabindex="0">
+          <img src="img/blossom/green-olive.jpg" alt="Green Olive" tabindex="0">
+          <img src="img/blossom/cashmere-blue.jpg" alt="Cashmere Blue" tabindex="0">
+        </div>
+        <div class="dress-inspiration">
+          <p>Если вам нужна помощь с образами,<br>то можете найти вдохновение ниже</p>
+          <svg viewBox="0 0 18 42" aria-hidden="true" focusable="false">
+            <path d="M9 1v34M2 28l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <a href="https://www.pinterest.com/search/pins/?q=orange%20wedding%20guest%20outfit%20women" target="_blank" rel="noreferrer">женские образы</a>
+            <a href="https://www.pinterest.com/search/pins/?q=orange%20wedding%20guest%20outfit%20men" target="_blank" rel="noreferrer">мужские образы</a>
           </div>
         </div>
       </section>
 
-      <section class="section details" id="details">
-        <div class="container">
-          <div class="section-label reveal">
-            <span>02</span>
-            <p class="overline">Дата и место</p>
-          </div>
-
-          <div class="date-layout">
-            <div class="date-card reveal">
-              <span class="date-card__monogram">N / O</span>
-              <span class="date-card__weekday">Суббота</span>
-              <strong>22</strong>
-              <span class="date-card__month">августа</span>
-              <span class="date-card__year">2026</span>
-              <span class="date-card__time">Начало в 16:00</span>
-            </div>
-
-            <div class="place reveal" data-delay="1">
-              <h2>Оранжевая ферма</h2>
-              <p class="place__lead">Загородная площадка для церемонии и ужина</p>
-              <p>Владимирская область, точная локация отмечена на карте</p>
-              <div class="place__time">
-                <span>Начало</span>
-                <strong>16:00</strong>
-              </div>
-
-              <div class="map-card" aria-label="Карта с точкой Оранжевая ферма">
-                <iframe
-                  title="Оранжевая ферма на карте"
-                  src="https://yandex.ru/map-widget/v1/?ll=40.734919%2C55.989555&z=16.8&pt=40.734919%2C55.989555%2Cpm2rdm"
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <a
-                class="map-link"
-                href="https://yandex.ru/maps/org/oranzhevaya_ferma/99030501914/?ll=40.734919%2C55.989555&z=16.8"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Открыть маршрут
-              </a>
-
-            </div>
-          </div>
+      <section class="details">
+        <img class="rose-oval" src="img/blossom/plain-oval-orange.png" alt="" width="1446" height="2607">
+        <p class="latin">info</p>
+        <h2><span>ВАЖНЫЕ</span><span>ДЕТАЛИ</span></h2>
+        <div class="detail-list">
+          <article>
+            <h3>подарки</h3>
+            <p>Если хотите подарить нам ценный и нужный<br>подарок, мы будем очень благодарны за вклад<br>в бюджет нашей молодой семьи</p>
+          </article>
+          <article>
+            <h3>цветы</h3>
+            <p>Если у вас есть желание подарить нам цветы,<br>будем благодарны за цветочный сертификат,<br>поскольку не успеем насладиться цветами<br>после торжества</p>
+          </article>
+          <article>
+            <h3>чат</h3>
+            <p>Мы создали чат нашего праздника, где<br>можно будет узнать дополнительную<br>информацию, поделиться фотографиями<br>и видео в день и после свадьбы</p>
+            <a href="#" class="small-btn chat-btn">ВСТУПИТЬ В ЧАТ</a>
+          </article>
         </div>
       </section>
 
-      <section class="section timeline-section" id="timeline">
-        <div class="container">
-          <div class="section-label reveal">
-            <span>03</span>
-            <p class="overline">Программа дня</p>
-          </div>
+      <section class="rsvp">
+        <h2>АНКЕТА ГОСТЯ</h2>
+        <p>Пожалуйста, подтвердите свое присутствие, заполнив форму ниже</p>
+        <strong>ДО 10 августа</strong>
+        <p class="form-note-top">так мы сможем красиво рассадить гостей<br>и передать площадке точное количество человек</p>
+        <form class="rsvp-form">
+          <div class="rsvp-form__fields">
+            <label class="form-field">
+              <span>Ваше имя и фамилия</span>
+              <input type="text" name="name" autocomplete="name" required>
+            </label>
 
-          <div class="timeline-intro reveal" data-delay="1">
-            <h2>Без спешки, но с красивыми паузами</h2>
-          </div>
-
-          <ol class="timeline">
-            <li class="timeline__item reveal">
-              <time>16:00</time>
-              <div>
-                <h3>Welcome</h3>
-                <p>Встречаемся на площадке, знакомимся и берем бокал игристого.</p>
-              </div>
-            </li>
-            <li class="timeline__item reveal">
-              <time>16:30</time>
-              <div>
-                <h3>Церемония</h3>
-                <p>Короткая и очень важная часть дня.</p>
-              </div>
-            </li>
-            <li class="timeline__item reveal">
-              <time>17:30</time>
-              <div>
-                <h3>Ужин</h3>
-                <p>Тосты, теплый свет, сезонное меню и разговоры.</p>
-              </div>
-            </li>
-            <li class="timeline__item reveal">
-              <time>20:00</time>
-              <div>
-                <h3>Танцы</h3>
-                <p>Первый танец, десерт и музыка до финала вечера.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="section dress-code" id="dress-code">
-        <div class="dress-code__photo image-reveal reveal">
-          <div
-            class="photo-placeholder photo-placeholder--details"
-            role="img"
-            aria-label="Место для фото свадебных деталей и палитры"
-          >
-            <span>Фото деталей</span>
-            <strong>букет, кольца, ткань, сервировка или палитра свадьбы</strong>
-          </div>
-        </div>
-
-        <div class="container dress-code__content" id="dress-code-palette">
-          <div class="section-label reveal">
-            <span>04</span>
-            <p class="overline">Дресс-код</p>
-          </div>
-          <h2 class="reveal" data-delay="1">Мягкая природная палитра</h2>
-          <p class="reveal" data-delay="2">
-            Мы будем рады образам в теплой природной палитре: мягкие оранжевые,
-            солнечные, бежевые, голубые и оливковые оттенки.
-          </p>
-
-          <div class="palette reveal" data-delay="3" aria-label="Палитра дресс-кода">
-            <figure class="palette-item">
-              <img class="palette-blob" src="img/blobs/optimized/sun-kiss.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
-              <figcaption>Солнечный беж</figcaption>
-            </figure>
-            <figure class="palette-item">
-              <img class="palette-blob" src="img/blobs/optimized/dusty-orange.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
-              <figcaption>Пыльный оранжевый</figcaption>
-            </figure>
-            <figure class="palette-item">
-              <img class="palette-blob" src="img/blobs/optimized/tangerine.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
-              <figcaption>Мандарин</figcaption>
-            </figure>
-            <figure class="palette-item">
-              <img class="palette-blob" src="img/blobs/optimized/sun-shine.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
-              <figcaption>Солнечный</figcaption>
-            </figure>
-            <figure class="palette-item">
-              <img class="palette-blob" src="img/blobs/optimized/butter-yellow.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
-              <figcaption>Сливочный желтый</figcaption>
-            </figure>
-            <figure class="palette-item">
-              <img class="palette-blob" src="img/blobs/optimized/cashmere-blue.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
-              <figcaption>Кашемировый голубой</figcaption>
-            </figure>
-            <figure class="palette-item">
-              <img class="palette-blob" src="img/blobs/optimized/chamois.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
-              <figcaption>Шамуа</figcaption>
-            </figure>
-            <figure class="palette-item">
-              <img class="palette-blob" src="img/blobs/optimized/green-olive.png" alt="" width="384" height="288" loading="lazy" decoding="async" />
-              <figcaption>Зеленая олива</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="section wishes" id="wishes">
-        <div class="container">
-          <div class="section-label reveal">
-            <span>05</span>
-            <p class="overline">Пожелания</p>
-          </div>
-
-          <div class="wishes__heading reveal" data-delay="1">
-            <h2>Несколько нежных просьб</h2>
-          </div>
-
-          <div class="wish-lines">
-            <article class="wish-line reveal">
-              <span class="wish-line__mark" aria-hidden="true">01</span>
-              <p>Самый ценный подарок для нас - ваше присутствие рядом в этот день.</p>
-            </article>
-            <article class="wish-line reveal">
-              <span class="wish-line__mark" aria-hidden="true">02</span>
-              <p>Если захочется прийти с комплиментом, вместо цветов можно выбрать бутылку вина для нашей коллекции.</p>
-            </article>
-            <article class="wish-line reveal">
-              <span class="wish-line__mark" aria-hidden="true">03</span>
-              <p>А если захотите порадовать нас подарком, удобнее всего будет конверт.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section rsvp" id="rsvp">
-        <div class="container">
-          <div class="section-label reveal">
-            <span>06</span>
-            <p class="overline">Анкета</p>
-          </div>
-
-          <div class="rsvp__grid">
-            <div class="rsvp__intro reveal">
-              <h2>Ответьте, пожалуйста, до 10 августа</h2>
-              <p>
-                Так мы сможем красиво рассадить гостей и передать площадке точное
-                количество человек.
-              </p>
-            </div>
-
-            <form class="rsvp-form reveal" data-delay="1">
-              <div class="rsvp-form__fields">
+            <fieldset class="form-field">
+              <legend>Вы будете с нами?</legend>
+              <div class="choice-group">
                 <label>
-                  <span>Ваше имя и фамилия</span>
-                  <input type="text" name="name" autocomplete="name" required>
+                  <input type="radio" name="attendance" value="yes" required>
+                  <span>Да, буду</span>
                 </label>
-
-                <fieldset>
-                  <legend>Вы будете с нами?</legend>
-                  <div class="choice-group">
-                    <label>
-                      <input type="radio" name="attendance" value="yes" required>
-                      <span>Да, буду</span>
-                    </label>
-                    <label>
-                      <input type="radio" name="attendance" value="no">
-                      <span>Не смогу</span>
-                    </label>
-                  </div>
-                </fieldset>
-
                 <label>
-                  <span>Дополнительная информация</span>
-                  <textarea
-                    name="additional_info"
-                    rows="3"
-                    placeholder="Если с вами будет кто-то еще или иная нужная информация"
-                  ></textarea>
+                  <input type="radio" name="attendance" value="no">
+                  <span>Не смогу</span>
                 </label>
+              </div>
+            </fieldset>
 
-                <div class="form-field">
-                  <span>Какой алкоголь предпочтителен для вас?</span>
-                  <div class="multi-select" data-multi-select>
-                    <button
-                      class="multi-select__button"
-                      type="button"
-                      aria-expanded="false"
-                      aria-controls="alcohol-options"
-                    >
-                      <span data-multi-select-value>Можно выбрать несколько вариантов</span>
-                    </button>
-                    <div class="multi-select__panel" id="alcohol-options">
-                      <label class="multi-select__option">
-                        <input type="checkbox" name="alcohol" value="Белое вино сухое">
-                        <span>Белое вино сухое</span>
-                      </label>
-                      <label class="multi-select__option">
-                        <input type="checkbox" name="alcohol" value="Белое вино полусладкое">
-                        <span>Белое вино полусладкое</span>
-                      </label>
-                      <label class="multi-select__option">
-                        <input type="checkbox" name="alcohol" value="Красное вино сладкое">
-                        <span>Красное вино сладкое</span>
-                      </label>
-                      <label class="multi-select__option">
-                        <input type="checkbox" name="alcohol" value="Розовое вино">
-                        <span>Розовое вино</span>
-                      </label>
-                      <label class="multi-select__option">
-                        <input type="checkbox" name="alcohol" value="Водка">
-                        <span>Водка</span>
-                      </label>
-                      <label class="multi-select__option">
-                        <input type="checkbox" name="alcohol" value="Коньяк">
-                        <span>Коньяк</span>
-                      </label>
-                      <label class="multi-select__option">
-                        <input type="checkbox" name="alcohol" value="Виски">
-                        <span>Виски</span>
-                      </label>
-                      <label class="multi-select__option">
-                        <input type="checkbox" name="alcohol" value="Jagermeiser">
-                        <span>Jagermeiser</span>
-                      </label>
-                    </div>
-                  </div>
-                  <small class="field-note">Если вы не пьете алкоголь, просто оставьте поле пустым.</small>
+            <label class="form-field">
+              <span>Дополнительная информация</span>
+              <textarea
+                name="additional_info"
+                rows="3"
+                placeholder="Если с вами будет кто-то еще или иная нужная информация"
+              ></textarea>
+            </label>
+
+            <div class="form-field">
+              <span>Какой алкоголь предпочтителен для вас?</span>
+              <div class="multi-select" data-multi-select>
+                <button
+                  class="multi-select__button"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="alcohol-options"
+                >
+                  <span data-multi-select-value>Можно выбрать несколько вариантов</span>
+                </button>
+                <div class="multi-select__panel" id="alcohol-options">
+                  <label class="multi-select__option">
+                    <input type="checkbox" name="alcohol" value="Белое вино сухое">
+                    <span>Белое вино сухое</span>
+                  </label>
+                  <label class="multi-select__option">
+                    <input type="checkbox" name="alcohol" value="Белое вино полусладкое">
+                    <span>Белое вино полусладкое</span>
+                  </label>
+                  <label class="multi-select__option">
+                    <input type="checkbox" name="alcohol" value="Красное вино сладкое">
+                    <span>Красное вино сладкое</span>
+                  </label>
+                  <label class="multi-select__option">
+                    <input type="checkbox" name="alcohol" value="Розовое вино">
+                    <span>Розовое вино</span>
+                  </label>
+                  <label class="multi-select__option">
+                    <input type="checkbox" name="alcohol" value="Водка">
+                    <span>Водка</span>
+                  </label>
+                  <label class="multi-select__option">
+                    <input type="checkbox" name="alcohol" value="Коньяк">
+                    <span>Коньяк</span>
+                  </label>
+                  <label class="multi-select__option">
+                    <input type="checkbox" name="alcohol" value="Виски">
+                    <span>Виски</span>
+                  </label>
+                  <label class="multi-select__option">
+                    <input type="checkbox" name="alcohol" value="Jagermeiser">
+                    <span>Jagermeiser</span>
+                  </label>
                 </div>
-
-                <button class="button button--wide" type="submit">Отправить ответ</button>
               </div>
-              <div class="rsvp-success" aria-hidden="true">
-                <p>Ваш ответ уже пришел нам, спасибо!</p>
-              </div>
-              <p class="form-note visually-hidden" role="status" aria-live="polite"></p>
-            </form>
-          </div>
-
-          <div class="guest-chat reveal" data-delay="2">
-            <div class="guest-chat__text">
-              <p class="overline">Чат для гостей</p>
-              <p>
-                Мы создадим чат ВКонтакте, чтобы делиться новостями, фото и
-                теплыми моментами свадебного дня.
-              </p>
+              <small class="field-note">Если вы не пьете алкоголь, просто оставьте поле пустым.</small>
             </div>
-            <a
-              class="button guest-chat__button"
-              href="https://vk.com/im"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Вступить в чат ВКонтакте
-            </a>
+
+            <button class="rsvp-submit" type="submit">ОТПРАВИТЬ ОТВЕТ</button>
           </div>
-        </div>
+          <div class="rsvp-success" aria-hidden="true">
+            <p>Ваш ответ уже пришел нам, спасибо!</p>
+          </div>
+          <p class="form-note" role="status" aria-live="polite"></p>
+        </form>
       </section>
 
-      <section class="final-screen" id="final">
-        <div
-          class="photo-placeholder photo-placeholder--final"
-          role="img"
-          aria-label="Место для финального атмосферного фото"
-        >
-          <span>Финальное фото</span>
-          <strong>вечерний кадр, гирлянды, танцы или общий снимок гостей</strong>
+      <section class="contacts">
+        <img class="olive-arch" src="img/blossom/plain-contact-orange.png" alt="" width="960" height="1107">
+        <h2>ЕСЛИ У ВАС ЕСТЬ ВОПРОСЫ</h2>
+        <p>В день свадьбы или до по любым вопросам<br>обращайтесь к нашему свадебному<br>организатору</p>
+        <div class="contact-row">
+          <b>ВАЛЕРИЯ</b>
+          <a href="tel:+79210000000">+7 (921) 000-00-00</a>
         </div>
-        <div class="final-screen__content reveal">
-          <p class="overline">До встречи</p>
-          <h2>22.08.2026</h2>
-          <p>С любовью, Настя и Олег</p>
-        </div>
+        <a class="call-btn" href="tel:+79210000000">ПОЗВОНИТЬ</a>
+        <p class="bye">до встречи</p>
       </section>
     </main>
 
-    <a class="floating-rsvp" href="#rsvp">Анкета</a>
-
+    <audio id="bg-music" loop preload="none">
+      <source src="https://dl.dropbox.com/scl/fi/nktba7wd0wv0y693ijqym/MACHETE_-_Nezhnost_47951974.mp3?rlkey=dd5df524uq3gfemb0py2ztiiy&st=3est5qh6&dl=0" type="audio/mpeg">
+    </audio>
     <script src="script.js"></script>
   </body>
 </html>
