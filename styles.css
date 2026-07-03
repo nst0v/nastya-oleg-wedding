@@ -59,6 +59,8 @@ a { color: inherit; }
   z-index: 100;
   display: grid;
   place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   background: #83400E;
   transition:
@@ -112,8 +114,17 @@ a { color: inherit; }
   transform: translate(var(--letter-shift), var(--letter-y)) scale(.985);
 }
 
+html.has-letter,
+body.has-letter {
+  background: #83400E;
+}
+
 body.has-letter {
   overflow: hidden;
+}
+
+body.has-letter .mobile-card {
+  background: #83400E;
 }
 
 @keyframes letterCoverIn {
@@ -144,7 +155,7 @@ body.has-letter {
 
 .marquee span {
   display: inline-block;
-  min-width: 200%;
+  min-width: max-content;
   animation: marquee 18s linear infinite;
 }
 
@@ -152,6 +163,7 @@ body.has-letter {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100vw;
 }
 
 @keyframes marquee {
@@ -306,9 +318,9 @@ body.has-letter {
 }
 
 .hero-photo {
-  width: 286px;
+  width: 340px;
   height: auto;
-  margin: -6px auto 43px;
+  margin: -14px auto 31px;
   object-fit: contain;
   filter: drop-shadow(0 18px 28px rgba(193, 74, 9, .14));
 }
@@ -345,19 +357,70 @@ body.has-letter {
 
 .music-btn {
   display: grid;
-  width: 86px;
-  height: 86px;
+  width: 108px;
+  height: 108px;
   margin: 0 auto;
+  padding: 0;
   place-items: center;
   border: 0;
   border-radius: 50%;
-  background: var(--tangerine);
-  color: var(--paper);
-  font: 700 13px/1.25 var(--sans);
+  background: transparent;
+  color: var(--tangerine);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.music-btn.is-playing { filter: brightness(1.05); }
+.music-sticker {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 14px 22px rgba(193, 74, 9, .18));
+}
+
+.music-sticker__paper {
+  fill: rgba(255, 255, 197, .92);
+  stroke: rgba(193, 74, 9, .38);
+  stroke-width: 1.2;
+}
+
+.music-sticker__ring {
+  fill: none;
+  stroke: rgba(193, 74, 9, .34);
+  stroke-width: 1;
+  stroke-dasharray: 1.5 5;
+}
+
+.music-sticker__text {
+  fill: var(--tangerine);
+  font: 700 7.2px/1 var(--sans);
+  letter-spacing: .02em;
+}
+
+.music-sticker__center {
+  fill: var(--tangerine);
+}
+
+.music-sticker__play,
+.music-sticker__pause {
+  fill: var(--paper);
+}
+
+.music-sticker__pause {
+  opacity: 0;
+}
+
+.music-btn.is-playing .music-sticker__paper {
+  fill: #fff7cf;
+}
+
+.music-btn.is-playing .music-sticker__play {
+  opacity: 0;
+}
+
+.music-btn.is-playing .music-sticker__pause {
+  opacity: 1;
+}
 
 .invitation {
   position: relative;
@@ -372,11 +435,12 @@ body.has-letter {
   max-width: none;
   height: auto;
   margin: 0;
-  translate: var(--card-center-shift, -50%) 0;
+  translate: var(--card-center-shift, -50%) var(--card-y-shift, 0);
 }
 
 .dear-card-image {
   --card-center-shift: -49.8%;
+  --card-y-shift: -34px;
   width: min(630px, 150%);
 }
 
@@ -387,24 +451,25 @@ body.has-letter {
 
 .place-section {
   position: relative;
-  padding: 40px 18px 48px;
+  padding: 40px 0 48px;
   text-align: center;
 }
 
 .place-section h2 {
-  margin: 0 0 25px;
+  margin: 0 12px 25px;
   color: var(--dusty-orange);
   font-family: var(--serif);
-  font-size: 43px;
+  font-size: 26px;
   font-weight: 500;
-  line-height: .95;
-  letter-spacing: -1.6px;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .place-section img {
-  width: min(100%, 354px);
+  width: 100%;
   height: auto;
-  margin: 0 auto;
+  margin: 0;
   object-fit: contain;
   border-radius: 6px;
   box-shadow: 0 18px 38px rgba(193, 74, 9, .14);
@@ -412,7 +477,7 @@ body.has-letter {
 
 .timing {
   position: relative;
-  height: 820px;
+  height: 920px;
   padding-top: 0;
   text-align: center;
 }
@@ -435,7 +500,6 @@ body.has-letter {
   margin: 22px 0 38px;
   color: var(--dusty-orange);
   font-size: 12px;
-  text-transform: uppercase;
 }
 
 .guests-line {
@@ -475,7 +539,6 @@ body.has-letter {
   display: block;
   font-size: 12px;
   line-height: 1.45;
-  text-transform: uppercase;
 }
 
 .dress {
@@ -965,6 +1028,7 @@ body.has-letter {
   }
 
   .mobile-card { display: none; }
+  .marquee--top { display: none; }
   .desktop-only {
     display: grid;
     min-height: 100vh;

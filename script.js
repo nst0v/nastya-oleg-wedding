@@ -4,6 +4,7 @@ const letterIntro = document.querySelector(".letter-intro");
 const letterButton = document.querySelector(".letter-button");
 
 document.documentElement.classList.add("motion-ready");
+document.documentElement.classList.toggle("has-letter", Boolean(letterIntro));
 document.body.classList.toggle("has-letter", Boolean(letterIntro));
 
 const splitTextToLetters = (element, delayStart = 0, delayStep = 34) => {
@@ -55,6 +56,7 @@ letterButton?.addEventListener("click", () => {
   }
 
   letterIntro.classList.add("is-open");
+  document.documentElement.classList.remove("has-letter");
   document.body.classList.remove("has-letter");
   window.scrollTo(0, 0);
 });
@@ -84,12 +86,12 @@ musicButton?.addEventListener("click", async () => {
       await audio.play();
       musicButton.classList.add("is-playing");
       musicButton.setAttribute("aria-pressed", "true");
-      musicButton.innerHTML = "ВЫКЛ.<br>МУЗЫКУ";
+      musicButton.setAttribute("aria-label", "Остановить мелодию нашей любви");
     } else {
       audio.pause();
       musicButton.classList.remove("is-playing");
       musicButton.setAttribute("aria-pressed", "false");
-      musicButton.innerHTML = "ВКЛЮЧИТЬ<br>МУЗЫКУ";
+      musicButton.setAttribute("aria-label", "Включите мелодию нашей любви");
     }
   } catch (error) {
     musicButton.classList.toggle("is-playing");
