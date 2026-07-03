@@ -2,6 +2,7 @@ const musicButton = document.querySelector(".music-btn");
 const audio = document.querySelector("#bg-music");
 const letterIntro = document.querySelector(".letter-intro");
 const letterButton = document.querySelector(".letter-button");
+const topMarquee = document.querySelector(".marquee--top");
 
 document.documentElement.classList.add("motion-ready");
 document.body.classList.toggle("has-letter", Boolean(letterIntro));
@@ -57,6 +58,9 @@ letterButton?.addEventListener("click", () => {
   letterIntro.classList.add("is-open");
   document.body.classList.remove("has-letter");
   window.scrollTo(0, 0);
+  window.setTimeout(() => {
+    topMarquee?.classList.add("is-visible");
+  }, 3200);
 });
 
 if ("IntersectionObserver" in window) {

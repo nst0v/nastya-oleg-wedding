@@ -60,7 +60,7 @@ a { color: inherit; }
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #C14A09;
+  background: #83400E;
   transition:
     opacity 700ms cubic-bezier(.2, .78, .2, 1),
     visibility 700ms step-end;
@@ -152,6 +152,23 @@ body.has-letter {
   position: absolute;
   top: 0;
   left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, -100%, 0);
+  transition:
+    opacity 420ms cubic-bezier(.2, .78, .2, 1),
+    transform 420ms cubic-bezier(.2, .78, .2, 1),
+    visibility 420ms step-end;
+}
+
+.marquee--top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 520ms cubic-bezier(.2, .78, .2, 1),
+    transform 520ms cubic-bezier(.2, .78, .2, 1),
+    visibility 0ms step-start;
 }
 
 @keyframes marquee {
