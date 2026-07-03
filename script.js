@@ -1,10 +1,10 @@
 const musicButton = document.querySelector(".music-btn");
 const audio = document.querySelector("#bg-music");
-const envelopeIntro = document.querySelector(".envelope-intro");
-const envelopeButton = document.querySelector(".envelope-button");
+const letterIntro = document.querySelector(".letter-intro");
+const letterButton = document.querySelector(".letter-button");
 
 document.documentElement.classList.add("motion-ready");
-document.body.classList.toggle("has-envelope", Boolean(envelopeIntro));
+document.body.classList.toggle("has-letter", Boolean(letterIntro));
 
 const splitTextToLetters = (element, delayStart = 0, delayStep = 34) => {
   let index = 0;
@@ -38,21 +38,18 @@ document.querySelectorAll(".couple, .hero h1 .hero-line, .hero h1 > span:not(.he
   heroDelay = splitTextToLetters(element, heroDelay, 32) + 70;
 });
 
-document.querySelectorAll("main > section:not(.hero):not(.envelope-intro) > *, main > .marquee:not(.marquee--top)").forEach((element) => {
+document.querySelectorAll("main > section:not(.hero):not(.letter-intro) > *, main > .marquee:not(.marquee--top)").forEach((element) => {
   element.classList.add("reveal-soft");
 });
 
-envelopeButton?.addEventListener("click", () => {
-  if (!envelopeIntro || envelopeIntro.classList.contains("is-opening")) {
+letterButton?.addEventListener("click", () => {
+  if (!letterIntro || letterIntro.classList.contains("is-open")) {
     return;
   }
 
-  envelopeIntro.classList.add("is-opening");
-
-  window.setTimeout(() => {
-    envelopeIntro.classList.add("is-open");
-    document.body.classList.remove("has-envelope");
-  }, 1500);
+  letterIntro.classList.add("is-open");
+  document.body.classList.remove("has-letter");
+  window.scrollTo(0, 0);
 });
 
 if ("IntersectionObserver" in window) {
