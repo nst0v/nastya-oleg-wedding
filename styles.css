@@ -1,12 +1,12 @@
 ﻿:root {
-  --chamois: #f6b461;
-  --tangerine: #f7864d;
-  --dusty-orange: #df7650;
-  --paper: color-mix(in srgb, var(--chamois) 14%, white);
-  --glass-cream: #fffaf2;
-  --glass-warm-shadow: rgba(148, 74, 45, .18);
-  --card-ink: rgba(121, 66, 48, .88);
-  --card-ink-soft: rgba(121, 66, 48, .68);
+  --chamois: #FFFFC5;
+  --tangerine: #C14A09;
+  --dusty-orange: #C14A09;
+  --paper: #FFFFC5;
+  --glass-cream: #FFFFC5;
+  --glass-warm-shadow: rgba(193, 74, 9, .18);
+  --card-ink: rgba(193, 74, 9, .88);
+  --card-ink-soft: rgba(193, 74, 9, .68);
   --sans: "Noto Sans", Arial, sans-serif;
   --serif: "Playfair Display", "Times New Roman", serif;
   --script: "Times New Roman", "Playfair Display", serif;
@@ -60,7 +60,7 @@ a { color: inherit; }
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #8b3f0f;
+  background: #C14A09;
   transition:
     opacity 700ms cubic-bezier(.2, .78, .2, 1),
     visibility 700ms step-end;
@@ -73,8 +73,8 @@ a { color: inherit; }
   display: none;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 34%, rgba(246, 180, 97, .18), transparent 42%),
-    linear-gradient(180deg, rgba(255, 250, 242, .08), rgba(88, 35, 16, .14));
+    radial-gradient(circle at 50% 34%, rgba(255, 255, 197, .18), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 197, .08), rgba(193, 74, 9, .14));
 }
 
 .letter-intro.is-open {
@@ -175,12 +175,12 @@ body.has-letter {
 @keyframes photoBloom {
   0% {
     opacity: 0;
-    filter: blur(10px) drop-shadow(0 18px 28px rgba(121, 66, 48, .14));
+    filter: blur(10px) drop-shadow(0 18px 28px rgba(193, 74, 9, .14));
     transform: scale(0.82);
   }
   100% {
     opacity: 1;
-    filter: blur(0) drop-shadow(0 18px 28px rgba(121, 66, 48, .14));
+    filter: blur(0) drop-shadow(0 18px 28px rgba(193, 74, 9, .14));
     transform: scale(1);
   }
 }
@@ -310,12 +310,12 @@ body.has-letter {
   height: auto;
   margin: -6px auto 43px;
   object-fit: contain;
-  filter: drop-shadow(0 18px 28px rgba(121, 66, 48, .14));
+  filter: drop-shadow(0 18px 28px rgba(193, 74, 9, .14));
 }
 
 .motion-ready .hero-photo {
   opacity: 0;
-  filter: blur(10px) drop-shadow(0 18px 28px rgba(121, 66, 48, .14));
+  filter: blur(10px) drop-shadow(0 18px 28px rgba(193, 74, 9, .14));
   transform: scale(0.82);
   transform-origin: center;
   animation: photoBloom 1500ms cubic-bezier(.16, .84, .22, 1) 1450ms forwards;
@@ -407,7 +407,7 @@ body.has-letter {
   margin: 0 auto;
   object-fit: contain;
   border-radius: 6px;
-  box-shadow: 0 18px 38px rgba(126, 69, 45, .14);
+  box-shadow: 0 18px 38px rgba(193, 74, 9, .14);
 }
 
 .timing {
@@ -524,7 +524,7 @@ body.has-letter {
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: 4px;
-  box-shadow: 0 12px 24px rgba(126, 69, 45, .12);
+  box-shadow: 0 12px 24px rgba(193, 74, 9, .12);
   transition: transform 220ms ease, box-shadow 220ms ease, z-index 220ms ease;
   transform-origin: center;
   cursor: pointer;
@@ -535,7 +535,7 @@ body.has-letter {
 .palette-collection img:focus-visible {
   z-index: 3;
   transform: scale(1.18);
-  box-shadow: 0 22px 42px rgba(126, 69, 45, .24);
+  box-shadow: 0 22px 42px rgba(193, 74, 9, .24);
 }
 
 .dress-inspiration {
@@ -615,12 +615,12 @@ body.has-letter {
   display: grid;
   gap: 20px;
   padding: 22px 16px 24px;
-  border: 1px solid rgba(223, 118, 80, .22);
+  border: 1px solid rgba(193, 74, 9, .22);
   border-radius: 8px;
   background:
-    linear-gradient(180deg, rgba(255,250,242,.58), rgba(246,180,97,.08)),
-    rgba(255,250,242,.35);
-  box-shadow: 0 22px 42px rgba(126, 69, 45, .08);
+    linear-gradient(180deg, rgba(255,255,197,.58), rgba(193,74,9,.08)),
+    rgba(255,255,197,.35);
+  box-shadow: 0 22px 42px rgba(193, 74, 9, .08);
 }
 
 .rsvp-form.is-submitted .rsvp-form__fields,
@@ -636,9 +636,9 @@ body.has-letter {
   min-height: 360px;
   place-items: center;
   padding: 42px 24px;
-  border: 1px solid rgba(223, 118, 80, .22);
+  border: 1px solid rgba(193, 74, 9, .22);
   border-radius: 8px;
-  background: rgba(255,250,242,.42);
+  background: rgba(255,255,197,.42);
   text-align: center;
 }
 
@@ -679,9 +679,9 @@ body.has-letter {
   width: 100%;
   min-height: 48px;
   padding: 0 16px;
-  border: 1px solid rgba(223, 118, 80, .34);
+  border: 1px solid rgba(193, 74, 9, .34);
   border-radius: 8px;
-  background: rgba(255,250,242,.38);
+  background: rgba(255,255,197,.38);
   color: var(--dusty-orange);
   font: 500 13px var(--sans);
   outline: 0;
@@ -698,13 +698,13 @@ body.has-letter {
 .rsvp-form textarea:focus,
 .multi-select__button:focus-visible,
 .multi-select.is-open .multi-select__button {
-  border-color: rgba(223, 118, 80, .72);
-  background: rgba(255,250,242,.62);
-  box-shadow: 0 0 0 3px rgba(223, 118, 80, .08);
+  border-color: rgba(193, 74, 9, .72);
+  background: rgba(255,255,197,.62);
+  box-shadow: 0 0 0 3px rgba(193, 74, 9, .08);
 }
 
 .rsvp-form ::placeholder {
-  color: rgba(223, 118, 80, .48);
+  color: rgba(193, 74, 9, .48);
 }
 
 .choice-group {
@@ -735,9 +735,9 @@ body.has-letter {
   align-items: center;
   gap: 10px;
   padding: 0 12px;
-  border: 1px solid rgba(223, 118, 80, .28);
+  border: 1px solid rgba(193, 74, 9, .28);
   border-radius: 8px;
-  background: rgba(255,250,242,.28);
+  background: rgba(255,255,197,.28);
   color: var(--dusty-orange);
   font-size: 12px;
   font-weight: 700;
@@ -752,9 +752,9 @@ body.has-letter {
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
-  border: 1px solid rgba(223, 118, 80, .48);
+  border: 1px solid rgba(193, 74, 9, .48);
   border-radius: 50%;
-  background: rgba(255,250,242,.36);
+  background: rgba(255,255,197,.36);
 }
 
 .multi-select__option span::before {
@@ -763,16 +763,16 @@ body.has-letter {
 
 .choice-group input:checked + span,
 .multi-select__option input:checked + span {
-  border-color: rgba(223, 118, 80, .72);
-  background: rgba(247, 134, 77, .12);
-  box-shadow: inset 0 0 0 1px rgba(223, 118, 80, .08);
+  border-color: rgba(193, 74, 9, .72);
+  background: rgba(193, 74, 9, .12);
+  box-shadow: inset 0 0 0 1px rgba(193, 74, 9, .08);
 }
 
 .choice-group input:checked + span::before,
 .multi-select__option input:checked + span::before {
   background:
     radial-gradient(circle, var(--dusty-orange) 38%, transparent 42%),
-    rgba(255,250,242,.36);
+    rgba(255,255,197,.36);
 }
 
 .multi-select {
@@ -832,10 +832,10 @@ body.has-letter {
   max-height: min(276px, 48svh);
   padding: 8px;
   overflow: auto;
-  border: 1px solid rgba(223, 118, 80, .22);
+  border: 1px solid rgba(193, 74, 9, .22);
   border-radius: 8px;
-  background: #fffaf2;
-  box-shadow: 0 18px 38px rgba(126, 69, 45, .16);
+  background: #FFFFC5;
+  box-shadow: 0 18px 38px rgba(193, 74, 9, .16);
 }
 
 .multi-select.is-open .multi-select__panel {
@@ -851,7 +851,7 @@ body.has-letter {
 
 .field-note {
   margin-top: -3px;
-  color: rgba(223, 118, 80, .7);
+  color: rgba(193, 74, 9, .7);
   font-size: 11px;
   line-height: 1.45;
 }
@@ -859,13 +859,13 @@ body.has-letter {
 .rsvp-submit {
   height: 50px;
   margin-top: 4px;
-  border: 1px solid rgba(255,250,242,.62);
+  border: 1px solid rgba(255,255,197,.62);
   border-radius: 999px;
-  background: rgba(255,250,242,.38);
-  color: rgba(121, 66, 48, .86);
+  background: rgba(255,255,197,.38);
+  color: rgba(193, 74, 9, .86);
   font: 700 12px var(--sans);
   letter-spacing: .08em;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.48), 0 14px 30px rgba(119,56,33,.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,197,.48), 0 14px 30px rgba(193,74,9,.12);
   backdrop-filter: blur(10px);
 }
 
@@ -998,9 +998,9 @@ body.has-letter {
     margin: 0 auto 28px;
     border: 18px solid var(--paper);
     border-radius: 6px;
-    background: #fffaf2;
+    background: #FFFFC5;
     box-shadow:
-      0 18px 42px rgba(126, 69, 45, .12),
+      0 18px 42px rgba(193, 74, 9, .12),
       0 0 0 1px var(--chamois);
   }
 
