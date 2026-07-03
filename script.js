@@ -10,6 +10,13 @@ const splitTextToLetters = (element, delayStart = 0, delayStep = 34) => {
   let index = 0;
 
   const walk = (node) => {
+    if (node.nodeType === Node.ELEMENT_NODE && node.matches("em")) {
+      node.classList.add("char", "char--word");
+      node.style.setProperty("--char-delay", `${delayStart + index * delayStep}ms`);
+      index += Math.max((node.textContent || "").length, 1);
+      return;
+    }
+
     if (node.nodeType === Node.TEXT_NODE) {
       const fragment = document.createDocumentFragment();
 
