@@ -13,6 +13,17 @@
 
 Откройте `index.html` в браузере. Страница рассчитана на мобильный viewport, на desktop показывается заглушка.
 
+## RSVP без VPN
+
+GitHub Pages не умеет выполнять serverless-функции, поэтому форма отправляет ответы на Vercel endpoint `https://nastya-oleg-wedding.vercel.app/api/rsvp`, а уже он пересылает сообщение в Telegram.
+
+Быстрый деплой:
+
+1. Импортируйте этот репозиторий в Vercel.
+2. Назовите проект `nastya-oleg-wedding`, чтобы endpoint совпал с адресом в `script.js`.
+3. Опционально задайте переменные `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`; сейчас в коде есть fallback для быстрого запуска.
+4. GitHub Pages можно оставить как основной сайт.
+
 ## Данные приглашения
 
 - Пара: Олег и Анастасия.

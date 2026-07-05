@@ -217,6 +217,11 @@ const rsvpForm = document.querySelector(".rsvp-form");
 const formNote = document.querySelector(".form-note");
 const TELEGRAM_BOT_TOKEN = "7244155453:AAEdnet6p9Vc43TZoUEVtLVcMuANQHSmpvw";
 const TELEGRAM_CHAT_ID = "-1003934063475";
+const RSVP_API_ENDPOINTS = [
+  "https://nastya-oleg-wedding.vercel.app/api/rsvp",
+  "/api/rsvp",
+];
+const RSVP_REQUEST_TIMEOUT = 12000;
 
 const formatAttendance = (attendance) => {
   if (attendance === "yes") {
@@ -265,6 +270,67 @@ const isTelegramConfigured = () =>
   TELEGRAM_BOT_TOKEN !== "ВСТАВЬ_НОВЫЙ_ТОКЕН_БОТА" &&
   TELEGRAM_CHAT_ID;
 
+const postJson = async (url, payload) => {
+  const controller = "AbortController" in window ? new AbortController() : null;
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  };
+  let timeoutId = null;
+
+  if (controller) {
+    requestOptions.signal = controller.signal;
+    timeoutId = window.setTimeout(() => controller.abort(), RSVP_REQUEST_TIMEOUT);
+  }
+
+  try {
+    const response = await fetch(url, requestOptions);
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.error || "Request failed");
+    }
+
+    return result;
+  } finally {
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
+  }
+};
+
+const sendDirectTelegramMessage = (answer) => {
+  if (!isTelegramConfigured()) {
+    throw new Error("Telegram bot token is not configured");
+  }
+
+  return postJson(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    chat_id: TELEGRAM_CHAT_ID,
+    text: formatTelegramMessage(answer),
+  });
+};
+
+const sendRsvpAnswer = async (answer) => {
+  let lastError = null;
+
+  for (const endpoint of RSVP_API_ENDPOINTS) {
+    try {
+      return await postJson(endpoint, answer);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  try {
+    return await sendDirectTelegramMessage(answer);
+  } catch (error) {
+    throw lastError || error;
+  }
+};
+
 const showRsvpSuccess = () => {
   rsvpForm.classList.add("is-submitted");
   rsvpForm.querySelector(".rsvp-form__fields")?.setAttribute("aria-hidden", "true");
@@ -301,26 +367,7 @@ if (rsvpForm && formNote) {
     submitButton?.setAttribute("disabled", "disabled");
 
     try {
-      if (!isTelegramConfigured()) {
-        throw new Error("Telegram bot token is not configured");
-      }
-
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: formatTelegramMessage(answer),
-        }),
-      });
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error("Request failed");
-      }
-
+      await sendRsvpAnswer(answer);
       localStorage.setItem("wedding-rsvp-answer", JSON.stringify(answer));
       formNote.textContent = "";
       showRsvpSuccess();
