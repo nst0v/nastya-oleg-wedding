@@ -91,6 +91,7 @@ a { color: inherit; }
   min-height: 100dvh;
   overflow: hidden;
   background: var(--letter-bg);
+  box-shadow: 0 220px 0 220px var(--letter-bg);
   transition:
     opacity 700ms cubic-bezier(.2, .78, .2, 1),
     visibility 700ms step-end;
@@ -152,6 +153,10 @@ body.has-letter {
 
 body.has-letter .mobile-card {
   background: var(--letter-bg);
+}
+
+body.has-letter .mobile-card > :not(.letter-intro) {
+  visibility: hidden;
 }
 
 @keyframes letterCoverIn {
@@ -522,10 +527,23 @@ body.has-letter .mobile-card {
 }
 
 .info-main-title__top {
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
   justify-content: center;
   gap: .09em;
+  max-width: none;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.info-main-title__top > span {
+  display: block;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.info-main-title > span:not(.info-main-title__top) {
+  display: block;
 }
 
 .info-script {
@@ -535,7 +553,7 @@ body.has-letter .mobile-card {
   font-weight: 400;
   line-height: .6;
   text-transform: none;
-  transform: translateY(.08em);
+  transform: translate(-.16em, .08em);
 }
 
 .info-item {
@@ -576,25 +594,17 @@ body.has-letter .mobile-card {
 .place-section {
   position: relative;
   margin-top: -28px;
-  padding: 18px 0 46px;
+  padding: 18px 0 38.8px;
   text-align: center;
-}
-
-.place-section h2 {
-  margin: 0 12px 25px;
-  color: var(--dusty-orange);
-  font-family: var(--serif);
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0;
-  white-space: nowrap;
 }
 
 .place-card {
   position: relative;
   display: block;
-  width: 100%;
+  left: 50%;
+  width: min(494px, 115%);
+  max-width: none;
+  translate: -50% 0;
 }
 
 .place-card img {
@@ -636,7 +646,7 @@ body.has-letter .mobile-card {
 
 .bus {
   position: relative;
-  margin-top: max(-29px, -6.7vw);
+  margin-top: clamp(12px, 3.8vw, 26px);
   background: #FFF8E3;
   overflow: hidden;
 }
