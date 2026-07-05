@@ -7,6 +7,7 @@
   --glass-warm-shadow: rgba(193, 74, 9, .18);
   --card-ink: rgba(193, 74, 9, .88);
   --card-ink-soft: rgba(193, 74, 9, .68);
+  --page-end-brown: #B0540F;
   --letter-bg: #6B673F;
   --sans: "Noto Sans", Arial, sans-serif;
   --serif: "Playfair Display", "Times New Roman", serif;
@@ -48,7 +49,7 @@
 * { box-sizing: border-box; }
 
 html {
-  background: var(--paper);
+  background: var(--page-end-brown);
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -984,7 +985,7 @@ body.gallery-open {
   width: min(746px, 178%);
   max-width: none;
   height: min(370px, 89vw);
-  margin: 0 0 -4px;
+  margin: 0;
   object-fit: cover;
   object-position: center 20%;
   translate: -50% 0;
@@ -1189,6 +1190,10 @@ body.gallery-open {
   display: none;
 }
 
+.rsvp-form.is-submitted {
+  margin-top: clamp(14px, 4vw, 22px);
+}
+
 .rsvp-form.is-submitted .rsvp-success {
   display: grid;
 }
@@ -1238,9 +1243,9 @@ body.gallery-open {
 .contacts::after {
   content: "";
   display: block;
-  height: max(56px, env(safe-area-inset-bottom));
+  height: max(132px, calc(env(safe-area-inset-bottom) + 96px));
   margin-top: -1px;
-  background: #B0540F;
+  background: var(--page-end-brown);
 }
 
 .question-card {
