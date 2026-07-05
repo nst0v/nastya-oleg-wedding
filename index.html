@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#FFFFC5">
+    <meta name="theme-color" content="#FFF8E3">
     <meta name="description" content="Электронное свадебное приглашение Олег и Анастасия">
     <title>Олег и Анастасия | Blossom</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -64,7 +64,10 @@
 
       <section class="place-section">
         <h2>ГДЕ ВСЕ СЛУЧИТСЯ</h2>
-        <img src="img/blossom/place.png" alt="Оранжевая ферма" width="1600" height="1600">
+        <div class="place-card">
+          <img src="img/blossom/place.png" alt="Оранжевая ферма" width="2000" height="2000">
+          <a class="place-map-link" href="https://yandex.ru/maps/-/CTq54YMl" target="_blank" rel="noopener noreferrer" aria-label="Открыть Оранжевую ферму на Яндекс Картах"></a>
+        </div>
       </section>
 
       <div class="marquee" aria-hidden="true">
@@ -72,15 +75,13 @@
       </div>
 
       <section class="timing">
-        <h2>ТАЙМИНГ</h2>
-        <p class="timing-lead">делимся планом вечера</p>
-        <ol>
-          <li><time>16:00</time><b>WELCOME</b><span>приветственный фуршет<br>и ваш «первый бокал»</span></li>
-          <li><time>16:30</time><b>СВАДЕБНАЯ ЦЕРЕМОНИЯ</b><span>клятвы, кольца и слезы счастья</span></li>
-          <li><time>17:00</time><b>ПРАЗДНИЧНЫЙ БАНКЕТ</b><span>танцы, смех и громкие тосты</span></li>
-          <li><time>23:00</time><b>ОФИЦИАЛЬНОЕ ЗАВЕРШЕНИЕ ВЕЧЕРА</b><span>торт, поцелуи и крепкие объятия</span></li>
-        </ol>
-        <img class="guests-line" src="img/blossom/guests-line-orange.png" alt="" width="712" height="412">
+        <img class="timing-image" src="img/blossom/timing.png" alt="Тайминг свадебного вечера" width="2000" height="2000">
+      </section>
+
+      <section class="bus">
+        <div class="bus-crop">
+          <img class="bus-image" src="img/blossom/bus.png" alt="Информация о трансфере для гостей" width="2000" height="2000">
+        </div>
       </section>
 
       <div class="marquee" aria-hidden="true">
@@ -88,34 +89,85 @@
       </div>
 
       <section class="dress">
-        <h2>ДРЕСС-КОД</h2>
-        <p class="latin">dress-code</p>
-        <p class="dress-intro">Мы очень трепетно готовим наше<br>торжество и будем благодарны, если вы<br>поддержите его цветовую гамму<br>и стилистику в своих образах</p>
-        <p class="palette-note">Выберите один или несколько оттенков<br>из нашей свадебной палитры</p>
-        <div class="palette-collection" aria-label="Цветовая палитра для гостей">
-          <img src="img/blossom/sunshine.jpg" alt="Sunshine" tabindex="0">
-          <img src="img/blossom/chamois.jpg" alt="Chamois" tabindex="0">
-          <img src="img/blossom/tangerine.jpg" alt="Tangerine" tabindex="0">
-          <img src="img/blossom/dusty-orange.jpg" alt="Dusty Orange" tabindex="0">
-          <img src="img/blossom/butter-yellow.jpg" alt="Butter Yellow" tabindex="0">
-          <img src="img/blossom/sun-kiss.jpg" alt="Sun Kiss" tabindex="0">
-          <img src="img/blossom/green-olive.jpg" alt="Green Olive" tabindex="0">
-          <img src="img/blossom/cashmere-blue.jpg" alt="Cashmere Blue" tabindex="0">
-        </div>
-        <div class="dress-inspiration">
-          <p>Если вам нужна помощь с образами,<br>то можете найти вдохновение ниже</p>
-          <svg viewBox="0 0 18 42" aria-hidden="true" focusable="false">
-            <path d="M9 1v34M2 28l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <div>
-            <a href="https://www.pinterest.com/search/pins/?q=orange%20wedding%20guest%20outfit%20women" target="_blank" rel="noreferrer">женские образы</a>
-            <a href="https://www.pinterest.com/search/pins/?q=orange%20wedding%20guest%20outfit%20men" target="_blank" rel="noreferrer">мужские образы</a>
+        <div class="dress-card" aria-labelledby="dress-title">
+          <div class="dress-heading">
+            <h2 id="dress-title">ДРЕСС-КОД</h2>
+            <p lang="en">dress code</p>
+          </div>
+
+          <p class="dress-copy">БУДЕМ РАДЫ, ЕСЛИ ВЫ ПОДДЕРЖИТЕ АТМОСФЕРУ<br>ТОРЖЕСТВА СВОИМИ ЯРКИМИ ЛЕТНИМИ<br>ОБРАЗАМИ В ПРЕДЛОЖЕННЫХ ОТТЕНКАХ</p>
+
+          <ul class="dress-palette" aria-label="Палитра дресс-кода">
+            <li class="dress-swatch dress-swatch--sunshine">
+              <span>SUNSHINE</span>
+              <span>12-0727 TCX</span>
+            </li>
+            <li class="dress-swatch dress-swatch--blossom">
+              <span>BLOSSOM</span>
+              <span>14-1513 TCX</span>
+            </li>
+            <li class="dress-swatch dress-swatch--tangerine">
+              <span>TANGERINE</span>
+              <span>15-1247 TCX</span>
+            </li>
+            <li class="dress-swatch dress-swatch--cashmere">
+              <span>CASHMERE BLUE</span>
+              <span>14-4115 TCX</span>
+            </li>
+            <li class="dress-swatch dress-swatch--harvest">
+              <span>HARVEST PUMPKIN</span>
+              <span>16-1260 TCX</span>
+            </li>
+            <li class="dress-swatch dress-swatch--butter">
+              <span>BUTTER YELLOW</span>
+              <span>11-0616 TCX</span>
+            </li>
+            <li class="dress-swatch dress-swatch--dusty">
+              <span>DUSTY ORANGE</span>
+              <span>16-1344 TCX</span>
+            </li>
+            <li class="dress-swatch dress-swatch--olive">
+              <span>GREEN OLIVE</span>
+              <span>17-0535 TCX</span>
+            </li>
+            <li class="dress-swatch dress-swatch--hazelnut">
+              <span>HAZELNUT</span>
+              <span>14-1315 TCX</span>
+            </li>
+          </ul>
+
+          <div class="dress-inspiration" aria-label="Для вашего вдохновения: дамы и джентльмены">
+            <p>для вашего вдохновения</p>
+            <strong><span>ДАМЫ</span><em>&amp;</em><span>ДЖЕНТЛЬМЕНЫ</span></strong>
           </div>
         </div>
       </section>
 
       <section class="details">
-        <img class="card-image info-card-image" src="img/blossom/info.png" alt="Важные детали" width="1600" height="1600">
+        <div class="info-card" aria-labelledby="info-title">
+          <img class="info-card-bg" src="img/blossom/info-bg.png" alt="" width="2000" height="2000" aria-hidden="true">
+          <div class="info-card-copy">
+            <h2 class="info-main-title" id="info-title">
+              <span class="info-main-title__top"><span class="info-script">info</span><span>ВАЖНЫЕ</span></span>
+              <span>ДЕТАЛИ</span>
+            </h2>
+
+            <div class="info-item info-item--gifts">
+              <h3>ПОДАРКИ</h3>
+              <p>НЕ ЛОМАЙТЕ ГОЛОВУ НАСЧЕТ ПОДАРКОВ. ВАШИ<br>ПОЖЕЛАНИЯ В КОНВЕРТЕ, КОТОРЫЕ ПОМОГУТ<br>ОСУЩЕСТВИТЬ НАШИ МЕЧТЫ - ЛУЧШИЙ ВАРИАНТ!</p>
+            </div>
+
+            <div class="info-item info-item--flowers">
+              <h3>ЦВЕТЫ</h3>
+              <p>ПОЖАЛУЙСТА, НЕ ДАРИТЕ НАМ ЦВЕТЫ. МЫ НЕ<br>СМОЖЕМ ИХ ВЗЯТЬ С СОБОЙ, ТАК КАК У НАС<br>ДОМА ЖИВЕТ ТРИ ХВОСТИКА, ДЛЯ КОТОРЫХ<br>ЦВЕТЫ ОПАСНЫ. ПОЭТОМУ, ВМЕСТО БУКЕТОВ,<br>МЫ С УДОВОЛЬСТВИЕМ ПРИМЕМ ОТ ВАС В ДАР<br>БУТЫЛОЧКУ ВИНА ИЛИ ЛЮБОГО ДРУГОГО<br>НАПИТКА, КОТОРЫЙ АССОЦИИРУЕТСЯ У ВАС С<br>НАШЕЙ ПАРОЙ.</p>
+            </div>
+
+            <div class="info-item info-item--kids">
+              <h3>НЕДЕТСКОЕ ВРЕМЯ</h3>
+              <p>ПОЖАЛУЙСТА, ОСТАВЬТЕ МАЛЫШЕЙ В НАДЕЖНЫХ<br>РУКАХ НА ВЕЧЕР ТОРЖЕСТВА, ТАК КАК ФОРМАТ<br>НАШЕГО МЕРОПРИЯТИЯ НЕ ПРЕДПОЛАГАЕТ<br>ДЕТСКОЙ ЗОНЫ И АНИМАТОРОВ.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="rsvp">
@@ -212,15 +264,12 @@
       </section>
 
       <section class="contacts">
-        <img class="olive-arch" src="img/blossom/plain-contact-orange.png" alt="" width="960" height="1107">
-        <h2>ЕСЛИ У ВАС ЕСТЬ ВОПРОСЫ</h2>
-        <p>В день свадьбы или до по любым вопросам<br>обращайтесь к нашему свадебному<br>организатору</p>
-        <div class="contact-row">
-          <b>ВАЛЕРИЯ</b>
-          <a href="tel:+79210000000">+7 (921) 000-00-00</a>
+        <div class="question-card" aria-label="Контакты организатора и ответы на вопросы">
+          <img class="question-image" src="img/blossom/question.png" alt="Контакты организатора и ответы на вопросы" width="2000" height="2000">
+          <a class="question-phone-link question-phone-link--bride" href="tel:+79042560787" aria-label="Позвонить Анастасии"></a>
+          <a class="question-phone-link question-phone-link--planner" href="tel:+79028817309" aria-label="Позвонить Елизавете"></a>
+          <a class="question-chat-link" href="https://vk.me/join/jQRAyazuPB1VPM9R4fKd6WzibSMcRY4kYgg=" target="_blank" rel="noopener noreferrer" aria-label="Перейти в чат ВКонтакте"></a>
         </div>
-        <a class="call-btn" href="tel:+79210000000">ПОЗВОНИТЬ</a>
-        <p class="bye">до встречи</p>
       </section>
     </main>
 
