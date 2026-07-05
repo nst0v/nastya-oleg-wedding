@@ -46,7 +46,9 @@ document.querySelectorAll(".couple, .hero h1 .hero-line, .hero h1 > span:not(.he
   heroDelay = splitTextToLetters(element, heroDelay, 32) + 70;
 });
 
-document.querySelectorAll("main > section:not(.hero):not(.letter-intro) > *, main > .marquee:not(.marquee--top)").forEach((element) => {
+document.querySelectorAll(
+  "main > section:not(.hero):not(.letter-intro) > *:not(.rsvp-form), main > .marquee:not(.marquee--top), .rsvp-form__fields > *"
+).forEach((element) => {
   element.classList.add("reveal-soft");
 });
 
@@ -70,13 +72,126 @@ if ("IntersectionObserver" in window) {
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+    { threshold: 0.01, rootMargin: "0px 0px 24% 0px" }
   );
 
   document.querySelectorAll(".reveal-soft").forEach((element) => revealObserver.observe(element));
 } else {
   document.querySelectorAll(".reveal-soft").forEach((element) => element.classList.add("is-visible"));
 }
+
+const styleGallery = document.querySelector("#style-gallery");
+const styleGalleryPage = styleGallery?.querySelector(".style-gallery__page");
+const styleGalleryTitle = styleGallery?.querySelector("#style-gallery-title");
+const styleGalleryGrid = styleGallery?.querySelector("[data-style-gallery-grid]");
+const styleGalleryClose = styleGallery?.querySelector(".style-gallery__close");
+const styleGalleryTriggers = document.querySelectorAll("[data-style-gallery]");
+const styleGalleryConfig = {
+  women: { folder: "woman", count: 30 },
+  men: { folder: "man", count: 28 },
+};
+let activeStyleGalleryTrigger = null;
+let zoomedStyleGalleryImage = null;
+
+const closeStyleGalleryZoom = () => {
+  zoomedStyleGalleryImage?.classList.remove("is-zoomed");
+  zoomedStyleGalleryImage = null;
+};
+
+const renderStyleGallery = (type, title) => {
+  const config = styleGalleryConfig[type];
+
+  if (!config || !styleGalleryGrid) {
+    return;
+  }
+
+  closeStyleGalleryZoom();
+
+  const images = Array.from({ length: config.count }, (_, index) => {
+    const image = document.createElement("img");
+    image.src = `img/blossom/${config.folder}/${index + 1}.jpg`;
+    image.alt = `${title} ${index + 1}`;
+    image.width = 600;
+    image.height = 600;
+    image.decoding = "async";
+    image.loading = index < 9 ? "eager" : "lazy";
+    return image;
+  });
+
+  styleGalleryGrid.replaceChildren(...images);
+};
+
+const openStyleGallery = (trigger) => {
+  if (!styleGallery || !styleGalleryTitle) {
+    return;
+  }
+
+  const type = trigger.dataset.styleGallery;
+  const title = trigger.textContent.trim();
+
+  activeStyleGalleryTrigger = trigger;
+  styleGalleryTitle.textContent = title;
+  renderStyleGallery(type, title);
+  styleGallery.classList.add("is-open");
+  styleGallery.setAttribute("aria-hidden", "false");
+  document.body.classList.add("gallery-open");
+  styleGalleryTriggers.forEach((button) => button.setAttribute("aria-expanded", String(button === trigger)));
+  styleGalleryPage?.focus({ preventScroll: true });
+};
+
+const closeStyleGallery = () => {
+  if (!styleGallery?.classList.contains("is-open")) {
+    return;
+  }
+
+  closeStyleGalleryZoom();
+  styleGallery.classList.remove("is-open");
+  styleGallery.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("gallery-open");
+  styleGalleryTriggers.forEach((button) => button.setAttribute("aria-expanded", "false"));
+  activeStyleGalleryTrigger?.focus({ preventScroll: true });
+  activeStyleGalleryTrigger = null;
+};
+
+styleGalleryTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", () => openStyleGallery(trigger));
+});
+
+styleGalleryGrid?.addEventListener("click", (event) => {
+  const image = event.target.closest("img");
+
+  if (!image || !styleGalleryGrid.contains(image)) {
+    return;
+  }
+
+  if (image === zoomedStyleGalleryImage) {
+    closeStyleGalleryZoom();
+    return;
+  }
+
+  closeStyleGalleryZoom();
+  image.classList.add("is-zoomed");
+  zoomedStyleGalleryImage = image;
+});
+
+styleGalleryClose?.addEventListener("click", closeStyleGallery);
+
+styleGallery?.addEventListener("click", (event) => {
+  if (event.target === styleGallery) {
+    closeStyleGallery();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    if (zoomedStyleGalleryImage) {
+      closeStyleGalleryZoom();
+      return;
+    }
+
+    closeStyleGallery();
+  }
+});
 
 musicButton?.addEventListener("click", async () => {
   if (!audio) return;
@@ -100,79 +215,31 @@ musicButton?.addEventListener("click", async () => {
 
 const rsvpForm = document.querySelector(".rsvp-form");
 const formNote = document.querySelector(".form-note");
-const multiSelects = document.querySelectorAll("[data-multi-select]");
 const TELEGRAM_BOT_TOKEN = "7244155453:AAEdnet6p9Vc43TZoUEVtLVcMuANQHSmpvw";
 const TELEGRAM_CHAT_ID = "-1003934063475";
 
-const closeMultiSelect = (multiSelect) => {
-  const button = multiSelect.querySelector(".multi-select__button");
-
-  multiSelect.classList.remove("is-open");
-  button?.setAttribute("aria-expanded", "false");
-};
-
-const updateMultiSelectValue = (multiSelect) => {
-  const value = multiSelect.querySelector("[data-multi-select-value]");
-  const selectedOptions = Array.from(multiSelect.querySelectorAll('input[type="checkbox"]:checked'));
-
-  if (!value) {
-    return;
-  }
-
-  if (selectedOptions.length === 0) {
-    value.textContent = "Можно выбрать несколько вариантов";
-    return;
-  }
-
-  if (selectedOptions.length === 1) {
-    value.textContent = selectedOptions[0].value;
-    return;
-  }
-
-  value.textContent = `Выбрано: ${selectedOptions.length}`;
-};
-
-multiSelects.forEach((multiSelect) => {
-  const button = multiSelect.querySelector(".multi-select__button");
-  const checkboxes = multiSelect.querySelectorAll('input[type="checkbox"]');
-
-  button?.addEventListener("click", () => {
-    const isOpen = multiSelect.classList.contains("is-open");
-
-    multiSelects.forEach(closeMultiSelect);
-    multiSelect.classList.toggle("is-open", !isOpen);
-    button.setAttribute("aria-expanded", String(!isOpen));
-  });
-
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", () => updateMultiSelectValue(multiSelect));
-  });
-
-  updateMultiSelectValue(multiSelect);
-});
-
-document.addEventListener("click", (event) => {
-  if (!event.target.closest("[data-multi-select]")) {
-    multiSelects.forEach(closeMultiSelect);
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    multiSelects.forEach(closeMultiSelect);
-  }
-});
-
 const formatAttendance = (attendance) => {
   if (attendance === "yes") {
-    return "✅ Присутствие: Да, буду присутствовать";
+    return "✅ Присутствие: Конечно, да!";
   }
 
   if (attendance === "no") {
-    return "❌ Присутствие: Нет, не смогу присутствовать";
+    return "❌ Присутствие: К сожалению, нет";
   }
 
   return "Присутствие: Не указано";
+};
+
+const formatTransfer = (transfer) => {
+  if (transfer === "yes") {
+    return "🚌 Трансфер: Да";
+  }
+
+  if (transfer === "no") {
+    return "🚌 Трансфер: Нет";
+  }
+
+  return "🚌 Трансфер: Не указано";
 };
 
 const formatTelegramMessage = (answer) => {
@@ -180,15 +247,16 @@ const formatTelegramMessage = (answer) => {
   const alcohol = answer.alcohol.length > 0
     ? answer.alcohol.map((item) => `• ${item}`).join("\n")
     : "Не указано";
-  const additionalInfo = answer.additionalInfo?.trim() || "Не указано";
+  const song = answer.song?.trim() || "Не указано";
 
   return [
     title,
     "",
     `👤 Имя: ${answer.name || "Не указано"}`,
     formatAttendance(answer.attendance),
-    `🥂 Алкоголь:\n${alcohol}`,
-    `📝 Дополнительная информация: ${additionalInfo}`,
+    formatTransfer(answer.transfer),
+    `🥂 Напитки:\n${alcohol}`,
+    `🎵 Песня: ${song}`,
   ].join("\n");
 };
 
@@ -201,7 +269,7 @@ const showRsvpSuccess = () => {
   rsvpForm.classList.add("is-submitted");
   rsvpForm.querySelector(".rsvp-form__fields")?.setAttribute("aria-hidden", "true");
   rsvpForm.querySelector(".rsvp-success")?.setAttribute("aria-hidden", "false");
-  rsvpForm.querySelectorAll("input, textarea, button").forEach((control) => {
+  rsvpForm.querySelectorAll("input, button").forEach((control) => {
     control.setAttribute("disabled", "disabled");
   });
 };
@@ -220,8 +288,9 @@ if (rsvpForm && formNote) {
     const answer = {
       name: formData.get("name"),
       attendance: formData.get("attendance"),
-      additionalInfo: formData.get("additional_info"),
+      transfer: formData.get("transfer"),
       alcohol: formData.getAll("alcohol"),
+      song: formData.get("song"),
       submittedAt: new Date().toISOString(),
     };
 
@@ -254,10 +323,6 @@ if (rsvpForm && formNote) {
 
       localStorage.setItem("wedding-rsvp-answer", JSON.stringify(answer));
       formNote.textContent = "";
-      multiSelects.forEach((multiSelect) => {
-        closeMultiSelect(multiSelect);
-        updateMultiSelectValue(multiSelect);
-      });
       showRsvpSuccess();
     } catch (error) {
       formNote.textContent = "Не получилось отправить ответ. Попробуйте еще раз чуть позже.";

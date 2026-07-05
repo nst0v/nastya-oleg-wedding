@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="QR-code">
-  <rect width="512" height="512" fill="#FFFFC5"/>
+  <rect width="512" height="512" fill="#FFF8E3"/>
   <rect x="24" y="24" width="112" height="112" rx="10" fill="#C14A09"/>
-  <rect x="40" y="40" width="80" height="80" rx="6" fill="#FFFFC5"/>
+  <rect x="40" y="40" width="80" height="80" rx="6" fill="#FFF8E3"/>
   <rect x="56" y="56" width="48" height="48" rx="5" fill="#C14A09"/>
   <rect x="376" y="24" width="112" height="112" rx="10" fill="#C14A09"/>
-  <rect x="392" y="40" width="80" height="80" rx="6" fill="#FFFFC5"/>
+  <rect x="392" y="40" width="80" height="80" rx="6" fill="#FFF8E3"/>
   <rect x="408" y="56" width="48" height="48" rx="5" fill="#C14A09"/>
   <rect x="24" y="376" width="112" height="112" rx="10" fill="#C14A09"/>
-  <rect x="40" y="392" width="80" height="80" rx="6" fill="#FFFFC5"/>
+  <rect x="40" y="392" width="80" height="80" rx="6" fill="#FFF8E3"/>
   <rect x="56" y="408" width="48" height="48" rx="5" fill="#C14A09"/>
   <path d="M 192 39 C 187 34.9, 185 32.4, 185 29.7 C 185 27.1, 187 25.4, 189.4 25.4 C 190.9 25.4, 191.7 26.2, 192 27.3 C 192.3 26.2, 193.1 25.4, 194.6 25.4 C 197 25.4, 199 27.1, 199 29.7 C 199 32.4, 197 34.9, 192 39 Z" fill="#C14A09"/>
   <path d="M 224 39 C 219 34.9, 217 32.4, 217 29.7 C 217 27.1, 219 25.4, 221.4 25.4 C 222.9 25.4, 223.7 26.2, 224 27.3 C 224.3 26.2, 225.1 25.4, 226.6 25.4 C 229 25.4, 231 27.1, 231 29.7 C 231 32.4, 229 34.9, 224 39 Z" fill="#C14A09"/>
