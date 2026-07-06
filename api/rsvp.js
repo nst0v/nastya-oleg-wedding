@@ -78,6 +78,83 @@ const normalizeAnswer = (answer) => ({
   song: cleanText(answer?.song, 250),
   submittedAt: cleanText(answer?.submittedAt, 80),
 });
+const READABLE_EMPTY_VALUE = "Не указано";
+const READABLE_SUBMITTED_AT_PATTERN = /^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}$/;
+
+const formatReadableSubmittedAt = (submittedAt) => {
+  if (!submittedAt) {
+    return "";
+  }
+
+  if (READABLE_SUBMITTED_AT_PATTERN.test(submittedAt)) {
+    return submittedAt;
+  }
+
+  const date = new Date(submittedAt);
+
+  if (Number.isNaN(date.getTime())) {
+    return submittedAt;
+  }
+
+  const parts = new Intl.DateTimeFormat("ru-RU-u-nu-latn", {
+    timeZone: "Europe/Moscow",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const valueByType = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+
+  return `${valueByType.day}.${valueByType.month}.${valueByType.year} ${valueByType.hour}:${valueByType.minute}`;
+};
+
+const formatReadableAttendance = (attendance) => {
+  if (attendance === "yes") {
+    return "Присутствие: Конечно, да!";
+  }
+
+  if (attendance === "no") {
+    return "Присутствие: К сожалению, нет";
+  }
+
+  return `Присутствие: ${READABLE_EMPTY_VALUE}`;
+};
+
+const formatReadableTransfer = (transfer) => {
+  if (transfer === "yes") {
+    return "Трансфер: Да";
+  }
+
+  if (transfer === "no") {
+    return "Трансфер: Нет";
+  }
+
+  return `Трансфер: ${READABLE_EMPTY_VALUE}`;
+};
+
+const formatReadableTelegramMessage = (answer) => {
+  const alcohol = answer.alcohol.length > 0
+    ? answer.alcohol.map((item) => `- ${item}`).join("\n")
+    : READABLE_EMPTY_VALUE;
+  const submittedAt = formatReadableSubmittedAt(answer.submittedAt);
+  const lines = [
+    answer.attendance === "no" ? "Новый ответ: гость не придет" : "Новая анкета гостя",
+    "",
+    `Имя и фамилия: ${answer.name || READABLE_EMPTY_VALUE}`,
+    formatReadableAttendance(answer.attendance),
+    formatReadableTransfer(answer.transfer),
+    `Напитки:\n${alcohol}`,
+    `Песня: ${answer.song || READABLE_EMPTY_VALUE}`,
+  ];
+
+  if (submittedAt) {
+    lines.push(`Отправлено: ${submittedAt}`);
+  }
+
+  return lines.join("\n");
+};
 
 const formatAttendance = (attendance) => {
   if (attendance === "yes") {
@@ -152,7 +229,7 @@ module.exports = async function handler(request, response) {
       },
       body: JSON.stringify({
         chat_id: chatId,
-        text: formatTelegramMessage(answer),
+        text: formatReadableTelegramMessage(answer),
       }),
     });
     const telegramResult = await telegramResponse.json().catch(() => ({}));
