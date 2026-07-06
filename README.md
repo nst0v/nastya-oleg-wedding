@@ -6,7 +6,8 @@
 
 - `index.html` — разметка приглашения.
 - `styles.css` — адаптивная верстка, типографика и декоративные блоки.
-- `script.js` — кнопка музыки и безопасный stub для RSVP-формы.
+- `script.js` — кнопка музыки и отправка RSVP-формы в Google Таблицу.
+- `google-apps-script.js` — код Google Apps Script для записи RSVP в таблицу.
 - `img/blossom/` — локальные ассеты приглашения.
 
 ## Как открыть
@@ -15,14 +16,13 @@
 
 ## RSVP без VPN
 
-GitHub Pages не умеет выполнять serverless-функции, поэтому форма отправляет ответы на Vercel endpoint `https://nastya-oleg-wedding.vercel.app/api/rsvp`, а уже он пересылает сообщение в Telegram.
+Форма отправляет ответы напрямую в Google Таблицу через Google Apps Script Web App:
 
-Быстрый деплой:
+`https://script.google.com/macros/s/AKfycbzD3GGT68gdbmWixYG8Gyf8lKisPIY7TTzumF5iYQiYUYuXPS5sBh6IfoQ1sPnhjr1baQ/exec`
 
-1. Импортируйте этот репозиторий в Vercel.
-2. Назовите проект `nastya-oleg-wedding`, чтобы endpoint совпал с адресом в `script.js`.
-3. Опционально задайте переменные `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`; сейчас в коде есть fallback для быстрого запуска.
-4. GitHub Pages можно оставить как основной сайт.
+Apps Script должен принимать POST-поле `payload` с JSON-ответом формы. Запрос отправляется как `application/x-www-form-urlencoded` в режиме `no-cors`, чтобы форма работала с GitHub Pages и кастомного домена.
+
+Код для Google Apps Script лежит в `google-apps-script.js`. После любых изменений в Apps Script нужно открыть `Deploy` → `Manage deployments` → выбрать текущий Web App → `Edit` → `New version` → `Deploy`, иначе опубликованный URL продолжит выполнять старую версию.
 
 ## Данные приглашения
 

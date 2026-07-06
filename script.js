@@ -215,14 +215,7 @@ musicButton?.addEventListener("click", async () => {
 
 const rsvpForm = document.querySelector(".rsvp-form");
 const formNote = document.querySelector(".form-note");
-const TELEGRAM_BOT_TOKEN = "7244155453:AAEdnet6p9Vc43TZoUEVtLVcMuANQHSmpvw";
-const TELEGRAM_CHAT_ID = "-1003934063475";
-const RSVP_API_ENDPOINTS = [
-  "https://nastya-oleg-wedding.vercel.app/api/rsvp",
-  "/api/rsvp",
-];
-const RSVP_REQUEST_TIMEOUT = 12000;
-const READABLE_EMPTY_VALUE = "Не указано";
+const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzD3GGT68gdbmWixYG8Gyf8lKisPIY7TTzumF5iYQiYUYuXPS5sBh6IfoQ1sPnhjr1baQ/exec";
 const READABLE_SUBMITTED_AT_PATTERN = /^\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}$/;
 
 const formatReadableSubmittedAt = (submittedAt) => {
@@ -254,159 +247,39 @@ const formatReadableSubmittedAt = (submittedAt) => {
   return `${valueByType.day}.${valueByType.month}.${valueByType.year} ${valueByType.hour}:${valueByType.minute}`;
 };
 
-const formatReadableAttendance = (attendance) => {
-  if (attendance === "yes") {
-    return "Присутствие: Конечно, да!";
-  }
+const getRsvpBody = (answer) => {
+  const body = new URLSearchParams();
 
-  if (attendance === "no") {
-    return "Присутствие: К сожалению, нет";
-  }
+  body.set("payload", JSON.stringify(answer));
+  body.set("name", answer.name || "");
+  body.set("attendance", answer.attendance || "");
+  body.set("transfer", answer.transfer || "");
+  body.set("alcohol", answer.alcohol.join(", "));
+  body.set("song", answer.song || "");
+  body.set("submittedAt", answer.submittedAt || "");
+  body.set("requestId", `${Date.now()}-${Math.random().toString(36).slice(2)}`);
 
-  return `Присутствие: ${READABLE_EMPTY_VALUE}`;
+  return body;
 };
 
-const formatReadableTransfer = (transfer) => {
-  if (transfer === "yes") {
-    return "Трансфер: Да";
+const postGoogleSheet = (answer) => {
+  const body = getRsvpBody(answer);
+
+  if ("sendBeacon" in navigator && navigator.sendBeacon(GOOGLE_SHEETS_WEB_APP_URL, body)) {
+    return { ok: true };
   }
 
-  if (transfer === "no") {
-    return "Трансфер: Нет";
-  }
-
-  return `Трансфер: ${READABLE_EMPTY_VALUE}`;
-};
-
-const formatReadableTelegramMessage = (answer) => {
-  const alcohol = answer.alcohol.length > 0
-    ? answer.alcohol.map((item) => `- ${item}`).join("\n")
-    : READABLE_EMPTY_VALUE;
-  const submittedAt = formatReadableSubmittedAt(answer.submittedAt);
-  const lines = [
-    answer.attendance === "no" ? "Новый ответ: гость не придет" : "Новая анкета гостя",
-    "",
-    `Имя и фамилия: ${answer.name || READABLE_EMPTY_VALUE}`,
-    formatReadableAttendance(answer.attendance),
-    formatReadableTransfer(answer.transfer),
-    `Напитки:\n${alcohol}`,
-    `Песня: ${answer.song?.trim() || READABLE_EMPTY_VALUE}`,
-  ];
-
-  if (submittedAt) {
-    lines.push(`Отправлено: ${submittedAt}`);
-  }
-
-  return lines.join("\n");
-};
-
-const formatAttendance = (attendance) => {
-  if (attendance === "yes") {
-    return "✅ Присутствие: Конечно, да!";
-  }
-
-  if (attendance === "no") {
-    return "❌ Присутствие: К сожалению, нет";
-  }
-
-  return "Присутствие: Не указано";
-};
-
-const formatTransfer = (transfer) => {
-  if (transfer === "yes") {
-    return "🚌 Трансфер: Да";
-  }
-
-  if (transfer === "no") {
-    return "🚌 Трансфер: Нет";
-  }
-
-  return "🚌 Трансфер: Не указано";
-};
-
-const formatTelegramMessage = (answer) => {
-  const title = answer.attendance === "no" ? "🔕 Новый отказ" : "🔔 Новое подтверждение!";
-  const alcohol = answer.alcohol.length > 0
-    ? answer.alcohol.map((item) => `• ${item}`).join("\n")
-    : "Не указано";
-  const song = answer.song?.trim() || "Не указано";
-
-  return [
-    title,
-    "",
-    `👤 Имя: ${answer.name || "Не указано"}`,
-    formatAttendance(answer.attendance),
-    formatTransfer(answer.transfer),
-    `🥂 Напитки:\n${alcohol}`,
-    `🎵 Песня: ${song}`,
-  ].join("\n");
-};
-
-const isTelegramConfigured = () =>
-  TELEGRAM_BOT_TOKEN &&
-  TELEGRAM_BOT_TOKEN !== "ВСТАВЬ_НОВЫЙ_ТОКЕН_БОТА" &&
-  TELEGRAM_CHAT_ID;
-
-const postJson = async (url, payload) => {
-  const controller = "AbortController" in window ? new AbortController() : null;
-  const requestOptions = {
+  fetch(GOOGLE_SHEETS_WEB_APP_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  };
-  let timeoutId = null;
-
-  if (controller) {
-    requestOptions.signal = controller.signal;
-    timeoutId = window.setTimeout(() => controller.abort(), RSVP_REQUEST_TIMEOUT);
-  }
-
-  try {
-    const response = await fetch(url, requestOptions);
-    const result = await response.json().catch(() => ({}));
-
-    if (!response.ok || !result.ok) {
-      throw new Error(result.error || "Request failed");
-    }
-
-    return result;
-  } finally {
-    if (timeoutId) {
-      window.clearTimeout(timeoutId);
-    }
-  }
-};
-
-const sendDirectTelegramMessage = (answer) => {
-  if (!isTelegramConfigured()) {
-    throw new Error("Telegram bot token is not configured");
-  }
-
-  return postJson(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-    chat_id: TELEGRAM_CHAT_ID,
-    text: formatReadableTelegramMessage(answer),
+    mode: "no-cors",
+    keepalive: true,
+    body,
   });
+
+  return { ok: true };
 };
 
-const sendRsvpAnswer = async (answer) => {
-  let lastError = null;
-
-  for (const endpoint of RSVP_API_ENDPOINTS) {
-    try {
-      return await postJson(endpoint, answer);
-    } catch (error) {
-      lastError = error;
-    }
-  }
-
-  try {
-    return await sendDirectTelegramMessage(answer);
-  } catch (error) {
-    throw lastError || error;
-  }
-};
+const sendRsvpAnswer = (answer) => postGoogleSheet(answer);
 
 const showRsvpSuccess = () => {
   rsvpForm.classList.add("is-submitted");
@@ -445,7 +318,6 @@ if (rsvpForm && formNote) {
 
     try {
       await sendRsvpAnswer(answer);
-      localStorage.setItem("wedding-rsvp-answer", JSON.stringify(answer));
       formNote.textContent = "";
       showRsvpSuccess();
     } catch (error) {
